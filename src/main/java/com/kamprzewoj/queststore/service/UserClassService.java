@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Slf4j(topic = "UserClassService")
+@Slf4j(topic = "----------> UserClassService")
 @Service("UserClassService")
 public class UserClassService {
 
@@ -24,24 +24,25 @@ public class UserClassService {
 		this.userClassRepository = userClassRepository;
 	}
 
-	//todo return 1/true if success
-	public void addUserClass(UserClass userClass) {
-		UserClass i = userClassRepository.save(userClass);
-		log.info(i.toString() + " <-------");
-	}
-
 	public List<UserClass> getAllUserClasses() {
 		return StreamSupport.stream(userClassRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 	}
 
 	public Optional<UserClass> getUserClassById(Integer id) {
+		log.info("..");
 		return StreamSupport.stream(userClassRepository.findAll().spliterator(), false)
 				.filter(c -> c.getId().equals(id))
 				.findFirst();
 	}
 
-	//todo return 1/true if success
+	//todo return 1/true if success ????
+	public void addUserClass(UserClass userClass) {
+		UserClass i = userClassRepository.save(userClass);
+		log.info(i.toString() + " <-------");
+	}
+
+	//todo return 1/true if success ????
 	public void deleteUserClassById(Integer id) {
 		userClassRepository.deleteById(id);
 	}

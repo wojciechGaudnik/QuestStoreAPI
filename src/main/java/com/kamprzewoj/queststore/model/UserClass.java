@@ -1,36 +1,36 @@
 package com.kamprzewoj.queststore.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-//import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 //@JsonProperty("name")
+//	@JsonIgnore
+//	@NotNull
+//	@NotEmpty
 
 
 @Data
 @Entity(name = "user_class")
 public class UserClass {
 
-//	@JsonIgnore
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "name is mandatory")
 	private String name;
 
-	@NotNull
-	@NotEmpty
+	@NotBlank(message = "photoUrl is mandatory")
 	private String photoUrl;
 
 	public UserClass(String name, String photoUrl) {
