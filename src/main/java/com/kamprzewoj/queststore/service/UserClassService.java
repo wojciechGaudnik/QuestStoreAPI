@@ -25,26 +25,29 @@ public class UserClassService {
 	}
 
 	public List<UserClass> getAllUserClasses() {
-		return StreamSupport.stream(userClassRepository.findAll().spliterator(), false)
+		return StreamSupport
+				.stream(userClassRepository.findAll().spliterator(), false)
 				.collect(Collectors.toList());
 	}
 
 	public Optional<UserClass> getUserClassById(Integer id) {
-		return StreamSupport.stream(userClassRepository.findAll().spliterator(), false)
-				.filter(c -> c.getId().equals(id))
-				.findFirst();
+		return userClassRepository.findById(id);
 	}
 
 	public Optional<UserClass> addUserClass(UserClass userClass) {
 		return Optional.of(userClassRepository.save(userClass));
 	}
 
-	//todo -------------------- up  done -------------------------
-
-	//todo return 1/true if success ????
 	public void deleteUserClassById(Integer id) {
 		userClassRepository.deleteById(id);
 	}
+
+	//todo -------------------- up  done -------------------------
+
+
+}
+
+
 
 	//todo check if exist
 //	public void updateUserClassById(UserClass userClass) {
@@ -55,5 +58,9 @@ public class UserClassService {
 //		userClassRepository.save(userClass);
 //	}
 
+	//		return StreamSupport
+//				.stream(userClassRepository.findAll().spliterator(), false)
+//				.filter(c -> c.getId().equals(id))
+//				.findFirst();
 
-}
+

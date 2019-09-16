@@ -6,13 +6,14 @@ import com.kamprzewoj.queststore.service.UserClassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.NestedExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,15 +68,12 @@ public class UserController {
 				: HttpStatus.BAD_REQUEST);
 	}
 
-
-	//todo -------------------- up  done -------------------------
-
 	@DeleteMapping(path = "{id}")
 	public void deleteClassUserById(@PathVariable("id") Integer id) {
 		userClassService.deleteUserClassById(id);
 	}
 
-
+//todo -------------------- up  done -------------------------
 
 
 	@PutMapping()
@@ -91,8 +89,19 @@ public class UserController {
 	//todo make this https://www.toptal.com/java/spring-boot-rest-api-error-handling
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity conflict(DataIntegrityViolationException e) {
-		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMostSpecificCause().getMessage());
 	}
+
+	@ExceptionHandler(EmptyResultDataAccessException.class)
+	public ResponseEntity conflict1(EmptyResultDataAccessException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMostSpecificCause().getMessage());
+	}
+
+//	@ExceptionHandler(IllegalStateException.class)
+//	public ResponseEntity conflict2(IllegalStateException e) {
+//		log.error("..");
+//		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+//	}
 
 
 
