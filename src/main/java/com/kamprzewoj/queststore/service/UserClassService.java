@@ -30,17 +30,16 @@ public class UserClassService {
 	}
 
 	public Optional<UserClass> getUserClassById(Integer id) {
-		log.info("..");
 		return StreamSupport.stream(userClassRepository.findAll().spliterator(), false)
 				.filter(c -> c.getId().equals(id))
 				.findFirst();
 	}
 
-	//todo return 1/true if success ????
-	public void addUserClass(UserClass userClass) {
-		UserClass i = userClassRepository.save(userClass);
-		log.info(i.toString() + " <-------");
+	public Optional<UserClass> addUserClass(UserClass userClass) {
+		return Optional.of(userClassRepository.save(userClass));
 	}
+
+	//todo -------------------- up  done -------------------------
 
 	//todo return 1/true if success ????
 	public void deleteUserClassById(Integer id) {

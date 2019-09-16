@@ -44,19 +44,27 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<List<UserClass>> getAllUserClasses() {
 		List<UserClass> users = userClassService.getAllUserClasses();
-		if (users.isEmpty()) {
-			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-		}
+		if (users.isEmpty()) {return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);}
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	@GetMapping(path = "{id}")
 	public ResponseEntity<UserClass> getUserById(@PathVariable("id") Integer id) {
-		log.isTraceEnabled();
-		log.info(".");
 		Optional<UserClass> userClass = userClassService.getUserClassById(id);
-		return new ResponseEntity<>(userClass.orElseGet(UserClass::new),(userClass.isPresent()) ? HttpStatus.OK : HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(userClass.orElseGet(UserClass::new),(userClass.isPresent())
+				? HttpStatus.OK
+				: HttpStatus.BAD_REQUEST);
 	}
+
+	@PostMapping
+	public ResponseEntity<UserClass> addUserClass(@Valid @RequestBody UserClass userClass) {
+		Optional<UserClass> userClassResponse = userClassService.addUserClass(userClass);
+		return new ResponseEntity<>(userClassResponse.orElseGet(UserClass::new),(userClassResponse.isPresent())
+				? HttpStatus.OK
+				: HttpStatus.BAD_REQUEST);
+	}
+
+	//todo -------------------- up  done -------------------------
 
 
 //	@PostMapping(path= "/", consumes = "application/json", produces = "application/json")
@@ -67,16 +75,19 @@ public class UserController {
 //}
 //@RequestParam(name = "name", required = false, defaultValue = "")String name
 
-	@PostMapping
-//	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<String> addUserClass(@Valid @RequestBody UserClass userClass) {
-		log.info(userClass.toString());
-		userClassService.addUserClass(userClass);
-		return ResponseEntity.ok("ok");
-//		return new ResponseEntity<>(userClassService.addUserClass(userClass), HttpStatus.CREATED);
-//		return new ResponseEntity<>(vehicleCommandService.createVehicle(vehicleCreateDTO), HttpStatus.CREATED)
 
-	}
+
+
+//	@PostMapping
+////	@ResponseStatus(HttpStatus.CREATED)
+//	public ResponseEntity<String> addUserClass(@Valid @RequestBody UserClass userClass) {
+//		log.info(userClass.toString());
+//		userClassService.addUserClass(userClass);
+//		return ResponseEntity.ok("ok");
+////		return new ResponseEntity<>(userClassService.addUserClass(userClass), HttpStatus.CREATED);
+////		return new ResponseEntity<>(vehicleCommandService.createVehicle(vehicleCreateDTO), HttpStatus.CREATED)
+//
+//	}
 
 
 
