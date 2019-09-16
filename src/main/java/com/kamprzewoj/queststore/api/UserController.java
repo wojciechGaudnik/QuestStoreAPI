@@ -10,14 +10,15 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 //todo ask mentor RESFull api should return what if ERROR ?
+//todo SIMPLE https://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate
 //todo GET /api/customers
 //todo GET /api/customers/1
 //todo PUT /api/customers/1  {"name": "Andrju"}  <--- edit
@@ -61,7 +62,6 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<UserClass> addUserClass(@Valid @RequestBody UserClass userClass) {
-		log.info(userClass.toString());
 		Optional<UserClass> userClassResponse = userClassService.addUserClass(userClass);
 		return new ResponseEntity<>(userClassResponse.orElseGet(UserClass::new),(userClassResponse.isPresent())
 				? HttpStatus.OK
@@ -73,12 +73,14 @@ public class UserController {
 		userClassService.deleteUserClassById(id);
 	}
 
-//todo -------------------- up  done -------------------------
-
-
-	@PutMapping()
-	public void updateClassUserById(@RequestBody UserClass userClass) {
-		userClassService.addUserClass(userClass);
+	//todo No User Class but OBJECT end noContent()
+	@PutMapping(path = "{id}")
+	public ResponseEntity<UserClass> updateClassUserById(@Valid @RequestBody UserClass userClass, @PathVariable("id") Integer id) {
+		Optional<UserClass> userClassFromRepo = userClassService.getUserClassById(id);
+		userClassFromRepo.ifPresent(u -> {userClassService.addUserClass(userClass);});
+		return new ResponseEntity<>(userClassFromRepo.orElseGet(UserClass::new),(userClassFromRepo.isPresent())
+				? HttpStatus.OK
+				: HttpStatus.BAD_REQUEST);
 	}
 
 
@@ -88,14 +90,30 @@ public class UserController {
 
 	//todo make this https://www.toptal.com/java/spring-boot-rest-api-error-handling
 	@ExceptionHandler(DataIntegrityViolationException.class)
-	public ResponseEntity conflict(DataIntegrityViolationException e) {
+	public ResponseEntity errorAdd(DataIntegrityViolationException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMostSpecificCause().getMessage());
 	}
 
 	@ExceptionHandler(EmptyResultDataAccessException.class)
-	public ResponseEntity conflict1(EmptyResultDataAccessException e) {
+	public ResponseEntity errorDel(EmptyResultDataAccessException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMostSpecificCause().getMessage());
 	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity errorUpdate(MethodArgumentNotValidException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+	}
+
+
+
+
+
+
+
+
+
+
+
 
 //	@ExceptionHandler(IllegalStateException.class)
 //	public ResponseEntity conflict2(IllegalStateException e) {

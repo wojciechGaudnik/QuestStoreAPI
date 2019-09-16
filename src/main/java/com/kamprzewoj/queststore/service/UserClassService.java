@@ -41,11 +41,15 @@ public class UserClassService {
 	public void deleteUserClassById(Integer id) {
 		userClassRepository.deleteById(id);
 	}
-
-	//todo -------------------- up  done -------------------------
-
-
 }
+
+
+
+
+
+
+
+
 
 
 
