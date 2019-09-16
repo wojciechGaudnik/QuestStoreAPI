@@ -2,31 +2,24 @@ package com.kamprzewoj.queststore.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import com.fasterxml.jackson.annotation.JsonProperty;
 //@JsonProperty("name")
 //	@JsonIgnore
 //	@NotNull
 //	@NotEmpty
-
+//@Column(unique = true)  //todo <--- only help create data base, don't work with the same way as NotBlank
 
 @Data
 @Entity(name = "user_class")
 public class UserClass {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
+	@Column(unique = true)
 	@NotBlank(message = "name is mandatory")
 	private String name;
 

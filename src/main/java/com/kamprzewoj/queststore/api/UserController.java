@@ -6,6 +6,8 @@ import com.kamprzewoj.queststore.service.UserClassService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -58,13 +60,40 @@ public class UserController {
 
 	@PostMapping
 	public ResponseEntity<UserClass> addUserClass(@Valid @RequestBody UserClass userClass) {
+		log.info(userClass.toString());
 		Optional<UserClass> userClassResponse = userClassService.addUserClass(userClass);
 		return new ResponseEntity<>(userClassResponse.orElseGet(UserClass::new),(userClassResponse.isPresent())
 				? HttpStatus.OK
 				: HttpStatus.BAD_REQUEST);
 	}
 
+
 	//todo -------------------- up  done -------------------------
+
+	@DeleteMapping(path = "{id}")
+	public void deleteClassUserById(@PathVariable("id") Integer id) {
+		userClassService.deleteUserClassById(id);
+	}
+
+
+
+
+	@PutMapping()
+	public void updateClassUserById(@RequestBody UserClass userClass) {
+		userClassService.addUserClass(userClass);
+	}
+
+
+
+
+
+
+	//todo make this https://www.toptal.com/java/spring-boot-rest-api-error-handling
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity conflict(DataIntegrityViolationException e) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+	}
+
 
 
 //	@PostMapping(path= "/", consumes = "application/json", produces = "application/json")
@@ -100,13 +129,5 @@ public class UserController {
 //		return userClassService.getUserClassById(id);
 //	}
 
-	@DeleteMapping(path = "{id}")
-	public void deleteClassUserById(@PathVariable("id") Integer id) {
-		userClassService.deleteUserClassById(id);
-	}
 
-	@PutMapping()
-	public void updateClassUserById(@RequestBody UserClass userClass) {
-		userClassService.addUserClass(userClass);
-	}
 }
