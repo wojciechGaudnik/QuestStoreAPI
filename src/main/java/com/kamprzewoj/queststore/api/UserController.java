@@ -36,8 +36,8 @@ import java.util.stream.Collectors;
 
 
 @Slf4j(topic = "----------> UserController")
-@RequestMapping(path = "/UserClass",  produces = "application/hal+json")
-//@RestfulController("UserControllerController")
+@RequestMapping(path = "/UserClass",  produces = "application/hal+json")    //todo <--- hateoas
+//@RequestMapping(path = "/UserClass",  produces = "application/json")        //todo <--- json
 @RestController("UserControllerController")
 public class UserController {
 
@@ -50,9 +50,12 @@ public class UserController {
 
 	@GetMapping
 	public ResponseEntity<List<HateoasUserClass>> getAllUserClasses() {
-
-		List<HateoasUserClass> users = userClassService.getAllUserClasses().stream().map(HateoasUserClass::new).collect(Collectors.toList());
-//		List<UserClass> users = userClassService.getAllUserClasses();
+		List<HateoasUserClass> users = userClassService                 //todo <--- hateoas
+				.getAllUserClasses()
+				.stream()
+				.map(HateoasUserClass::new)
+				.collect(Collectors.toList());
+//		List<UserClass> users = userClassService.getAllUserClasses();   //todo <--- json
 		if (users.isEmpty()) {return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);}
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
