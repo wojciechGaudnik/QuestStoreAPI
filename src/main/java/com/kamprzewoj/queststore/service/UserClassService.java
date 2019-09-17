@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+//todo Spring MVC
 @Slf4j(topic = "----------> UserClassService")
 @Service("UserClassService")
 public class UserClassService {
@@ -30,7 +31,7 @@ public class UserClassService {
 				.collect(Collectors.toList());
 	}
 
-	public Optional<UserClass> getUserClassById(Integer id) {
+	public Optional<UserClass> getUserClassById(Long id) {
 		return userClassRepository.findById(id);
 	}
 
@@ -38,7 +39,7 @@ public class UserClassService {
 		return Optional.of(userClassRepository.save(userClass));
 	}
 
-	public void deleteUserClassById(Integer id) {
+	public void deleteUserClassById(Long id) {
 		userClassRepository.deleteById(id);
 	}
 }

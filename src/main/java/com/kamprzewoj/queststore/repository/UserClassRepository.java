@@ -6,9 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-
+//todo Spring MVC       http://localhost:8080/api/UserClass/115
 @Repository("UserClassRepository")
-public interface UserClassRepository extends CrudRepository<UserClass, Integer> {
+public interface UserClassRepository extends CrudRepository<UserClass, Long> {
 //	Optional<UserClass> findByNameAnd(String name);
 //	Optional<UserClass> findByPhotoUrl(String photoUrl);
 	Optional<UserClass> deleteByName(String name);

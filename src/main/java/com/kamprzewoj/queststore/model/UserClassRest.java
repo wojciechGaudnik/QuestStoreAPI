@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
 //@Column(unique = true)  //todo <--- only help create data base, don't work with the same way as NotBlank
 
 @Data
-@Entity(name = "user_class")
-public class UserClass {
+@Entity(name = "user_class_rest")
+public class UserClassRest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +26,10 @@ public class UserClass {
 	@NotBlank(message = "photoUrl is mandatory")
 	private String photoUrl;
 
-	public UserClass(String name, String photoUrl) {
+	public UserClassRest(String name, String photoUrl) {
 		this.name = name;
 		this.photoUrl = photoUrl;
 	}
 
-	public UserClass() {}
+	public UserClassRest() {}
 }

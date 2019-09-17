@@ -3,6 +3,7 @@ package com.kamprzewoj.queststore.api;
 import com.kamprzewoj.queststore.model.UserClass;
 import com.kamprzewoj.queststore.service.UserClassService;
 
+import com.kamprzewoj.queststore.tools.HateoasUserClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,6 +17,7 @@ import javax.validation.Valid;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 //todo ask mentor RESFull api should return what if ERROR ?
 //todo SIMPLE https://www.springboottutorial.com/spring-boot-crud-rest-service-with-jpa-hibernate
@@ -34,7 +36,8 @@ import java.util.Optional;
 
 
 @Slf4j(topic = "----------> UserController")
-@RequestMapping(path = "/UserClass")
+@RequestMapping(path = "/UserClass",  produces = "application/hal+json")
+//@RestfulController("UserControllerController")
 @RestController("UserControllerController")
 public class UserController {
 
@@ -46,14 +49,16 @@ public class UserController {
 	}
 
 	@GetMapping
-	public ResponseEntity<List<UserClass>> getAllUserClasses() {
-		List<UserClass> users = userClassService.getAllUserClasses();
+	public ResponseEntity<List<HateoasUserClass>> getAllUserClasses() {
+
+		List<HateoasUserClass> users = userClassService.getAllUserClasses().stream().map(HateoasUserClass::new).collect(Collectors.toList());
+//		List<UserClass> users = userClassService.getAllUserClasses();
 		if (users.isEmpty()) {return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);}
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
 
 	@GetMapping(path = "{id}")
-	public ResponseEntity<UserClass> getUserById(@PathVariable("id") Integer id) {
+	public ResponseEntity<UserClass> getUserById(@PathVariable("id") Long id) {
 		Optional<UserClass> userClass = userClassService.getUserClassById(id);
 		return new ResponseEntity<>(userClass.orElseGet(UserClass::new),(userClass.isPresent())
 				? HttpStatus.OK
@@ -69,13 +74,13 @@ public class UserController {
 	}
 
 	@DeleteMapping(path = "{id}")
-	public void deleteClassUserById(@PathVariable("id") Integer id) {
+	public void deleteClassUserById(@PathVariable("id") Long id) {
 		userClassService.deleteUserClassById(id);
 	}
 
 	//todo No User Class but OBJECT end noContent()
 	@PutMapping(path = "{id}")
-	public ResponseEntity<UserClass> updateClassUserById(@Valid @RequestBody UserClass userClass, @PathVariable("id") Integer id) {
+	public ResponseEntity<UserClass> updateClassUserById(@Valid @RequestBody UserClass userClass, @PathVariable("id") Long id) {
 		Optional<UserClass> userClassFromRepo = userClassService.getUserClassById(id);
 		userClassFromRepo.ifPresent(u -> {userClassService.addUserClass(userClass);});
 		return new ResponseEntity<>(userClassFromRepo.orElseGet(UserClass::new),(userClassFromRepo.isPresent())
@@ -89,6 +94,7 @@ public class UserController {
 
 
 	//todo make this https://www.toptal.com/java/spring-boot-rest-api-error-handling
+//	todo IllegalArgumentException <--- handle this, bad url
 	@ExceptionHandler(DataIntegrityViolationException.class)
 	public ResponseEntity errorAdd(DataIntegrityViolationException e) {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMostSpecificCause().getMessage());
@@ -109,6 +115,7 @@ public class UserController {
 
 
 
+//todo 	@GetMapping (value = "/download", produces = MediaType.APPLICATION_JSON_VALUE)
 
 
 
