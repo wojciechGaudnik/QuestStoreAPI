@@ -48,14 +48,20 @@ public class UserController {
 		this.userClassService = userClassService;
 	}
 
-	@GetMapping
+//	@GetMapping //todo <--- json
+//	public ResponseEntity<List<UserClass>> getAllUserClasses() {
+//		List<UserClass> users = userClassService.getAllUserClasses();
+//		if (users.isEmpty()) {return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);}
+//		return new ResponseEntity<>(users, HttpStatus.OK);
+//	}
+
+	@GetMapping //todo <--- hateoas
 	public ResponseEntity<List<HateoasUserClass>> getAllUserClasses() {
-		List<HateoasUserClass> users = userClassService                 //todo <--- hateoas
+		List<HateoasUserClass> users = userClassService
 				.getAllUserClasses()
 				.stream()
 				.map(HateoasUserClass::new)
 				.collect(Collectors.toList());
-//		List<UserClass> users = userClassService.getAllUserClasses();   //todo <--- json
 		if (users.isEmpty()) {return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);}
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
