@@ -1,6 +1,8 @@
 package com.kamprzewoj.queststore.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,7 +25,8 @@ public class UserClass {
 	@NotBlank(message = "name is mandatory")
 	private String name;
 
-	@NotBlank(message = "photoUrl is mandatory")
+	@NotEmpty(message = "photoUrl is mandatory <--- hibernate ")
+	@NotBlank(message = "photoUrl is mandatory <--- javax ")
 	private String photoUrl;
 
 	public UserClass(String name, String photoUrl) {
