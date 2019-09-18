@@ -13,7 +13,6 @@
 //import java.util.stream.Collectors;
 //import java.util.stream.StreamSupport;
 //
-////todo Spring MVC
 //@Slf4j(topic = "----------> UserClassService")
 //@Service("UserClassService")
 //public class UserClassService {
@@ -21,7 +20,7 @@
 //	private final UserClassRepository userClassRepository;
 //
 //	@Autowired
-//	public UserClassService(@Qualifier("UserClassRepository") UserClassRepository userClassRepository) {
+//	public UserClassService(@Qualifier("RestUserClassRepository") UserClassRepository userClassRepository) {
 //		this.userClassRepository = userClassRepository;
 //	}
 //
