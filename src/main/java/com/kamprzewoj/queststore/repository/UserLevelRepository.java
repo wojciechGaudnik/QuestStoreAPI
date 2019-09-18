@@ -4,11 +4,9 @@ import com.kamprzewoj.queststore.model.Level;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import java.util.List;
-
 @RepositoryRestResource
-public interface LevelRepository extends CrudRepository<Level, Long> {
+public interface UserLevelRepository extends CrudRepository<Level, Long> {
 
-	List<Level> findByName (String name);
-	List<Level> findByValue (int value);
+	Level findByName (String name);
+	Level findByValue (int value);
 }
