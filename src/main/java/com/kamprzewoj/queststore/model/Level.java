@@ -13,28 +13,26 @@ import javax.validation.constraints.NotNull;
 //@Column(unique = true)  //todo <--- only help create data base, don't work with the same way as NotBlank
 
 @Data
-@Entity(name = "user_class")
-public class UserClass {
+@Entity(name = "level")
+public class Level {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(unique = true)
-	@NotNull(message = "photoUrl is mandatory <--- javax ")
-	@NotEmpty(message = "photoUrl is mandatory <--- hibernate ")
-	@NotBlank(message = "photoUrl is mandatory <--- javax ")
+	@NotNull(message = "name is mandatory <--- javax ")
+	@NotEmpty(message = "name is mandatory <--- hibernate ")
+	@NotBlank(message = "name is mandatory <--- javax ")
 	private String name;
 
-	@NotNull(message = "photoUrl is mandatory <--- javax ")
-	@NotEmpty(message = "photoUrl is mandatory <--- hibernate ")
-	@NotBlank(message = "photoUrl is mandatory <--- javax ")
-	private String photoUrl;
+	@NotNull(message = "value is mandatory <--- javax ")
+	private int value;
 
-	public UserClass(String name, String photoUrl) {
+	public Level(String name, int value) {
 		this.name = name;
-		this.photoUrl = photoUrl;
+		this.value = value;
 	}
 
-	public UserClass() {}
+	public Level() {}
 }
