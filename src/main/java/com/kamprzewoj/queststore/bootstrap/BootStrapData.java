@@ -1,13 +1,7 @@
 package com.kamprzewoj.queststore.bootstrap;
 
-import com.kamprzewoj.queststore.model.ItemCategory;
-import com.kamprzewoj.queststore.model.Level;
-import com.kamprzewoj.queststore.model.QuestCategory;
-import com.kamprzewoj.queststore.model.UserClass;
-import com.kamprzewoj.queststore.repository.ItemCategoryRepository;
-import com.kamprzewoj.queststore.repository.UserLevelRepository;
-import com.kamprzewoj.queststore.repository.QuestCategoryRepository;
-import com.kamprzewoj.queststore.repository.UserClassRepository;
+import com.kamprzewoj.queststore.model.*;
+import com.kamprzewoj.queststore.repository.*;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -19,23 +13,33 @@ public class BootStrapData implements CommandLineRunner {
 	private final UserLevelRepository userLevelRepository;
 	private final QuestCategoryRepository questCategoryRepository;
 	private final ItemCategoryRepository itemCategoryRepository;
+	private final ItemCartRepository itemCartRepository;
 
 	public BootStrapData(UserClassRepository userClassRepository,
 	                     UserLevelRepository userLevelRepository,
 	                     QuestCategoryRepository questCategoryRepository,
-	                     ItemCategoryRepository itemCategoryRepository) {
+	                     ItemCategoryRepository itemCategoryRepository,
+	                     ItemCartRepository itemCartRepository) {
 		this.userClassRepository = userClassRepository;
 		this.userLevelRepository = userLevelRepository;
 		this.questCategoryRepository = questCategoryRepository;
 		this.itemCategoryRepository = itemCategoryRepository;
+		this.itemCartRepository = itemCartRepository;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 		initUserClassDB();
-		initLevelRepositoryDB();
+		initUserLevelRepositoryDB();
 		initQuestCategoryDB();
+		initItemCategoryDB();
 
+		ItemCategory itemCategory = itemCategoryRepository.findAll().iterator().next();
+		ItemCard itemCard = new ItemCard("First Cart", itemCategory);
+		itemCartRepository.save(itemCard);
+	}
+
+	private void initItemCategoryDB() {
 		System.out.println(ConsoleColors.YELLOW + "Loading ItemCategory data:");
 
 		ItemCategory itemCategory1 = new ItemCategory();
@@ -51,7 +55,6 @@ public class BootStrapData implements CommandLineRunner {
 		itemCategoryRepository.save(itemCategory3);
 
 		System.out.println("ItemCategory saved: " + itemCategoryRepository.count() + ConsoleColors.RESET);
-
 	}
 
 	private void initQuestCategoryDB() {
@@ -93,23 +96,23 @@ public class BootStrapData implements CommandLineRunner {
 		System.out.println("UserClass saved: " + userClassRepository.count() + ConsoleColors.RESET);
 	}
 
-	private void initLevelRepositoryDB() {
+	private void initUserLevelRepositoryDB() {
 		System.out.println(ConsoleColors.YELLOW + "Loading Levels data:");
 
-		Level level1 = new Level();
-		level1.setName("Low Level");
-		level1.setValue(1);
-		userLevelRepository.save(level1);
+		UserLevel userLevel1 = new UserLevel();
+		userLevel1.setName("Low Level");
+		userLevel1.setValue(1);
+		userLevelRepository.save(userLevel1);
 
-		Level level2 = new Level();
-		level2.setName("Medium Level");
-		level2.setValue(2);
-		userLevelRepository.save(level2);
+		UserLevel userLevel2 = new UserLevel();
+		userLevel2.setName("Medium Level");
+		userLevel2.setValue(2);
+		userLevelRepository.save(userLevel2);
 
-		Level level3 = new Level();
-		level3.setName("High Level");
-		level3.setValue(3);
-		userLevelRepository.save(level3);
+		UserLevel userLevel3 = new UserLevel();
+		userLevel3.setName("High Level");
+		userLevel3.setValue(3);
+		userLevelRepository.save(userLevel3);
 
 
 		System.out.println("UserLevels saved: " + userLevelRepository.count() + ConsoleColors.RESET);
