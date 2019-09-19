@@ -11,7 +11,7 @@ public class UserLevel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long Id;
 
 	@Column(unique = true)
 	@NotEmpty(message = "name is mandatory")
