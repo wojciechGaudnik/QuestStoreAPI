@@ -11,8 +11,9 @@ target/
 *.ipr
 
 
-!/spring-boot-log.log
-spring-boot-log.log
+!/spring-boot-log*.log
+spring-boot-log*.log
+*.tmp
 
 
 #test
