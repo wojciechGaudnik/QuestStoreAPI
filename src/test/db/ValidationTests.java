@@ -16,15 +16,25 @@ import org.testng.annotations.*;
 
 import javax.validation.ConstraintViolationException;
 
+import java.util.Properties;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ValidationTests {
 
 	private static Session session;
 	private static SessionFactory sessionFactory;
+	private static Properties properties;
 
 	@BeforeClass(dependsOnGroups = "InitTestsStop")
 	private static void beforeClass(){
+		properties = new Properties();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
+		properties.put("hibernate.connection.driver_class ", "org.postgresql.Driver");
+		properties.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/snipets");
+		properties.put("hibernate.connection.username", "postgres");
+		properties.put("hibernate.connection.password", "postgres");
+		properties.put("hibernate.hbm2ddl.auto", "create-drop");
 		sessionFactory = new Configuration()
 				.addPackage("Hibernate")
 				.addAnnotatedClass(User.class)
@@ -38,6 +48,7 @@ public class ValidationTests {
 				.addAnnotatedClass(GroupQuestBasket.class)
 				.addAnnotatedClass(QuestCard.class)
 				.addAnnotatedClass(ItemCard.class)
+				.addProperties(properties)
 				.buildSessionFactory();
 		session = sessionFactory.openSession();
 		session.beginTransaction();

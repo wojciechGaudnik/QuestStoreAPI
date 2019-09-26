@@ -25,10 +25,16 @@ public class InitTests {
 
 	private static Session session;
 	private static SessionFactory sessionFactory;
+	private static Properties properties;
 
 	@BeforeClass
 	private static void beforeClass(){
-		Properties properties = new Properties();
+		properties = new Properties();
+		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
+		properties.put("hibernate.connection.driver_class ", "org.postgresql.Driver");
+		properties.put("hibernate.connection.url", "jdbc:postgresql://localhost:5432/snipets");
+		properties.put("hibernate.connection.username", "postgres");
+		properties.put("hibernate.connection.password", "postgres");
 		properties.put("hibernate.hbm2ddl.auto", "update");
 		sessionFactory = new Configuration()
 				.addPackage("Hibernate")
@@ -158,8 +164,6 @@ public class InitTests {
 	}
 
 	private static void cleanDB() {
-		Properties properties = new Properties();
-		properties.put("hibernate.hbm2ddl.auto", "create-drop");
 		sessionFactory = new Configuration()
 				.addPackage("Hibernate")
 				.addAnnotatedClass(User.class)
