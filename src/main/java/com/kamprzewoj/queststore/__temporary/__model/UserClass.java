@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore.model;
+package com.kamprzewoj.queststore.__temporary.__model;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;

@@ -1,12 +1,10 @@
 package com.kamprzewoj.queststore.controllers;
 
-import com.kamprzewoj.queststore.model.ItemCard;
-import com.kamprzewoj.queststore.model.UserClass;
+import com.kamprzewoj.queststore.__temporary.__model.ItemCard;
 import com.kamprzewoj.queststore.repository.ItemCartRepository;
 import com.kamprzewoj.queststore.repository.UserClassRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 

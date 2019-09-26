@@ -1,12 +1,12 @@
-package com.kamprzewoj.queststore.model;
+package com.kamprzewoj.queststore.__temporary.__model;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.NotEmpty;
 import javax.persistence.*;
 
 @Data
-@Entity(name = "item_category")
-public class ItemCategory {
+@Entity(name = "quest_category")
+public class QuestCategory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,11 +16,10 @@ public class ItemCategory {
 	@NotEmpty(message = "name is mandatory")
 	private String name;
 
-	public ItemCategory(String name) {
+	public QuestCategory(String name) {
 		this.name = name;
 	}
 
-	public ItemCategory() {}
+	public QuestCategory() {}
 }
-
 

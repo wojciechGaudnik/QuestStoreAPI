@@ -1,7 +1,7 @@
 package com.kamprzewoj.queststore.repository;
 
-import com.kamprzewoj.queststore.model.ItemCard;
-import com.kamprzewoj.queststore.model.ItemCategory;
+import com.kamprzewoj.queststore.__temporary.__model.ItemCard;
+import com.kamprzewoj.queststore.__temporary.__model.ItemCategory;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

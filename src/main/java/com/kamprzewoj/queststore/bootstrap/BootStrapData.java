@@ -1,6 +1,6 @@
 package com.kamprzewoj.queststore.bootstrap;
 
-import com.kamprzewoj.queststore.model.*;
+import com.kamprzewoj.queststore.__temporary.__model.*;
 import com.kamprzewoj.queststore.repository.*;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 import org.springframework.boot.CommandLineRunner;
