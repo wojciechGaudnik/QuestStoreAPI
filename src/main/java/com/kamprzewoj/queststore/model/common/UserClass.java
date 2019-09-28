@@ -4,8 +4,10 @@ import com.kamprzewoj.queststore.model.persons.Mentor;
 import com.kamprzewoj.queststore.model.persons.User;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -33,12 +35,14 @@ public class UserClass {
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
 
+
 	@ManyToMany(
 			targetEntity= Mentor.class)
 	@JoinTable(
-			name = "join_userclasses_mentors",
+			uniqueConstraints = {@UniqueConstraint(columnNames = {"mentor_id", "user_class_id"})},
+			name= "join_userclasses_mentors",
 			joinColumns = {@JoinColumn(name = "user_class_id")},
-			inverseJoinColumns = {@JoinColumn(name = "mentor_id")}	)
+			inverseJoinColumns = {@JoinColumn(name = "mentor_id")})
 	private List<Mentor> mentors;
 
 	@OneToMany(

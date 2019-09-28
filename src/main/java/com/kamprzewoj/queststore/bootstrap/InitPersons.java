@@ -10,8 +10,6 @@ import com.kamprzewoj.queststore.repository.persons.MentorRepository;
 import com.kamprzewoj.queststore.repository.persons.UserRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 
-import java.util.Optional;
-
 class InitPersons {
 	static void creepyDB(CreepyRepository creepyRepository){
 		System.out.println(ConsoleColors.YELLOW + "Loading Creepy data:");
@@ -65,6 +63,7 @@ class InitPersons {
 		UserLevel userLevel1 = userLevelRepository.findById(1L).get();
 		UserLevel userLevel2 = userLevelRepository.findById(2L).get();
 		UserLevel userLevel3 = userLevelRepository.findById(3L).get();
+
 
 		User user1 = User.builder()
 				.firstName("User First")

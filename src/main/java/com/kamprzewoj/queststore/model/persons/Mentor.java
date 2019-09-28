@@ -6,6 +6,7 @@ import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -51,14 +52,15 @@ public class Mentor {
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
 
-	@UniqueElements //todo don't work can make one mentor with two classes1
+
+//	@UniqueElements //todo don't work can make one mentor with two classes1
 	@ManyToMany(                                             //todo <--- 100% OK !!!
 			targetEntity = UserClass.class)
 	@JoinTable(
 			name = "join_userclasses_mentors",
 			joinColumns = {@JoinColumn(name = "mentor_id")},
 			inverseJoinColumns = {@JoinColumn(name = "user_class_id")})
-	private List<UserClass> userClasses;
+	private List<@UniqueElements UserClass> userClasses;
 }
 
 

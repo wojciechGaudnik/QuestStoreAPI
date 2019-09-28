@@ -72,6 +72,8 @@ public class BootStrapData implements CommandLineRunner {
 		InitBaskets.groupItemBasketDB(groupItemBasketRepository, userRepository);
 		InitBaskets.groupQuestBasketDB(groupQuestBasketRepository, userRepository);
 
+//		InitManyToMany.tieMentorAndUserClass(mentorRepository, userClassRepository);
+
 //		ItemCategory itemCategory = itemCategoryRepository.findAll().iterator().next();
 //		ItemCard itemCard = new ItemCard("First Cart", itemCategory);
 //		itemCartRepository.save(itemCard);
