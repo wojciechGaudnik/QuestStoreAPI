@@ -17,8 +17,7 @@ import org.testng.annotations.*;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DependenciesLongTests {
 
@@ -27,7 +26,7 @@ public class DependenciesLongTests {
 	private static Properties properties;
 
 	@BeforeClass
-	private static void beforeMethod(){
+	private static void beforeClass(){
 		properties = new Properties();
 		properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
 		properties.put("hibernate.connection.driver_class ", "org.postgresql.Driver");
@@ -55,7 +54,7 @@ public class DependenciesLongTests {
 	}
 
 	@AfterClass
-	private static void afterMethod(){
+	private static void afterClass(){
 		session.close();
 		sessionFactory.close();
 	}
@@ -172,6 +171,29 @@ public class DependenciesLongTests {
 				.stream()
 				.map(UserClass::getName)
 				.collect(Collectors.joining(" - ")));
+	}
+
+	@Test(dependsOnGroups = "Sixth",
+			groups = "Seventh")
+	public static void manyToManyMentorsAndUserClasses() {
+		afterClass();
+		beforeClass();
+		assertDoesNotThrow(DependenciesLongTests::loadAllDB);
+		Mentor mentor1 = session.get(Mentor.class, 1L);
+		UserClass userClass1 = session.get(UserClass.class, 1L);
+		UserClass userClass2 = session.get(UserClass.class, 2L);
+
+		mentor1.getUserClasses().add(userClass1);
+		mentor1.getUserClasses().add(userClass2);
+		commitAndBegin();
+
+		mentor1 = session.get(Mentor.class, 1L);
+		userClass1 = session.get(UserClass.class, 1L);
+		userClass2 = session.get(UserClass.class, 2L);
+
+		assertEquals("Mentor name First", userClass1.getMentors().get(0).getFirstName());
+		assertEquals("Mentor name First", userClass2.getMentors().get(0).getFirstName());
+		assertEquals("User Class First - User Class Second", mentor1.getUserClasses().stream().map(UserClass::getName).collect(Collectors.joining(" - ")));
 	}
 
 	private static void loadAllDB() {

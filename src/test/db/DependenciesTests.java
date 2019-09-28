@@ -16,6 +16,8 @@ import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.testng.annotations.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -298,6 +300,7 @@ public class DependenciesTests {
 		userLevel2 = session.get(UserLevel.class, 2L);
 		assertEquals("User Level Second", userLevel2.getName());
 	}
+
 
 	private static void loadAllDB() {
 		InitEntities.creepy(session);
