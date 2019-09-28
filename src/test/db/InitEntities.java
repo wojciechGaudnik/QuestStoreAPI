@@ -181,7 +181,7 @@ class InitEntities {
 				.name("Group Item Basket Third")
 				.value(3)
 				.closeBasket(true)
-				.owner(user2)
+				.owner(user3)
 				.build();
 		session.save(groupItemBasket1);
 		session.save(groupItemBasket2);
