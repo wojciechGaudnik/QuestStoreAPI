@@ -10,7 +10,7 @@ public class QuestStoreApplication {
 		SpringApplication.run(QuestStoreApplication.class, args);
 	}
 }
-
+//test 1
 // todo --- how mount new end point without crash existing from REST ? <--- siadz na spotkojnie i
 // todo przelec od gotowych end pontow, one musza być jakimś kontrolerem wystawiane !!! znajdz i NADPISZ A JAK TO NIE PUJDZIE
 // todo TO MIKRO SERVIS 3 <
