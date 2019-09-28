@@ -69,8 +69,8 @@ class InitPersons {
 				.firstName("User First")
 				.lastName("Last name First")
 				.email("user1@test.pl")
-				.nick("user nick First")
-				.password("asdf")
+				.nick("nick1")
+				.password("nick1")
 				.photoUrl("http://photo1.com.pl")
 				.userLevel(userLevel1)
 				.build();
@@ -78,8 +78,8 @@ class InitPersons {
 				.firstName("User Second")
 				.lastName("Last name Second")
 				.email("user2@test.pl")
-				.nick("user nick Second")
-				.password("asdff")
+				.nick("nick2")
+				.password("nick2")
 				.photoUrl("http://photo2.com.pl")
 				.userLevel(userLevel2)
 				.build();
@@ -87,8 +87,8 @@ class InitPersons {
 				.firstName("User Third")
 				.lastName("Last name Third")
 				.email("user3@test.pl")
-				.nick("user nick Third")
-				.password("asdf")
+				.nick("nick3")
+				.password("nick3")
 				.photoUrl("http://photo3.com.pl")
 				.userLevel(userLevel3)
 				.build();

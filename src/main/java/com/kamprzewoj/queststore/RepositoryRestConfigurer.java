@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 
 
 //TODO Spring Data REST
-@Component
-public class RepositoryRestConfigurer extends RepositoryRestConfigurerAdapter {
-	@Override
-	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-		config
-				.setDefaultMediaType(MediaType.APPLICATION_JSON_UTF8);
-	}
-}
+//@Component
+//public class RepositoryRestConfigurer extends RepositoryRestConfigurerAdapter {
+//	@Override
+//	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+//		config
+//				.setDefaultMediaType(MediaType.APPLICATION_JSON_UTF8);
+//	}
+//}
