@@ -332,7 +332,7 @@ public class DependenciesTests {
 		return session;
 	}
 
-	private static void closeAfterExceptionAndBegin() {
+	public static void closeAfterExceptionAndBegin() {
 		session.close();
 		session = sessionFactory.openSession();
 		session.beginTransaction();

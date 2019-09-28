@@ -108,31 +108,25 @@ public class DependenciesLongTests {
 	@Test(dependsOnGroups = "Second",
 			groups = "Third")
 	public static void ifDependencyManyToManyThird() {
-		Mentor mentor1;
-		UserClass userClass3;
+		UserClass userClass3 = UserClass.builder()
+				.name("User Class Third")
+				.photoUrl("http://test.pl/photo3.jpg")
+				.build();
+		Mentor mentor1 = session.get(Mentor.class, 1L);
 		//todo set mentor1 second userClass1 Error
-		mentor1 = session.get(Mentor.class, 1L);
-		userClass3 = session.get(UserClass.class, 3L);
-//		assertEquals("User Class First", mentor1.getUserClasses().get(0).getName());
-//		assertEquals("User Class Second", mentor1.getUserClasses().get(1).getName());
-//		mentor1.getUserClasses().add(userClass3);
-//		commitAndBegin();
+		assertEquals("User Class First", mentor1.getUserClasses().get(0).getName());
+		assertEquals("User Class Second", mentor1.getUserClasses().get(1).getName());
+		mentor1.getUserClasses().add(userClass3);
+		session.save(userClass3);
+		session.update(mentor1);
+		commitAndBegin();
 	}
 
 	@Test(dependsOnGroups = "Third",
 			groups = "Fourth")
 	public static void ifDependencyManyToManyFourth() {
-		Mentor mentor1;
-		UserClass userClass1;
-
-//		mentor1 = session.get(Mentor.class, 1L);
-//		userClass1 = session.get(UserClass.class, 1L);
-//		assertEquals("User Class First - User Class First - User Class Second", mentor1.getUserClasses()
-//				.stream()
-//				.map(UserClass::getName)
-//				.collect(Collectors.joining(" - ")));
-//		mentor1.getUserClasses().remove(userClass1);
-//		commitAndBegin();
+		UserClass userClass3 = session.get(UserClass.class, 4L);
+		assertEquals("User Class Third", userClass3.getName());
 	}
 
 	@Test(dependsOnGroups = "Fourth",
@@ -141,7 +135,8 @@ public class DependenciesLongTests {
 		Mentor mentor1;
 
 		mentor1 = session.get(Mentor.class, 1L);
-		assertEquals("User Class First - User Class Second", mentor1.getUserClasses()
+		System.out.println("test");
+		assertEquals("User Class First - User Class Second - User Class Third", mentor1.getUserClasses()
 				.stream()
 				.map(UserClass::getName)
 				.collect(Collectors.joining(" - ")));
@@ -159,7 +154,7 @@ public class DependenciesLongTests {
 		mentor2 = session.get(Mentor.class, 2L);
 		mentor3 = session.get(Mentor.class, 3L);
 
-		assertEquals("User Class First - User Class Second", mentor1.getUserClasses()
+		assertEquals("User Class First - User Class Second - User Class Third", mentor1.getUserClasses()
 				.stream()
 				.map(UserClass::getName)
 				.collect(Collectors.joining(" - ")));

@@ -3,14 +3,11 @@ package com.kamprzewoj.queststore.model.persons;
 import com.kamprzewoj.queststore.model.common.UserClass;
 import lombok.*;
 import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
