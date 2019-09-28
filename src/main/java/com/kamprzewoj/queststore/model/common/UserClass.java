@@ -4,10 +4,8 @@ import com.kamprzewoj.queststore.model.persons.Mentor;
 import com.kamprzewoj.queststore.model.persons.User;
 import lombok.*;
 import org.hibernate.envers.Audited;
-import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -34,7 +32,6 @@ public class UserClass {
 	@NotBlank(message = "photoUrl is mandatory")
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
-
 
 	@ManyToMany(
 			targetEntity= Mentor.class)
