@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "creepy")
-public class Creepy{
+public class Creepy implements Person{
 
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

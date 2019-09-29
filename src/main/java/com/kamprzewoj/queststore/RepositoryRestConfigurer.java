@@ -1,6 +1,8 @@
 package com.kamprzewoj.queststore;
 
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.core.mapping.ExposureConfiguration;
+import org.springframework.data.rest.core.mapping.RepositoryDetectionStrategy;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 //	@Override
 //	public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
 //		config
-//				.setDefaultMediaType(MediaType.APPLICATION_JSON_UTF8);
+//				.setDefaultMediaType(MediaType.APPLICATION_JSON_UTF8)
+//				.setRepositoryDetectionStrategy(RepositoryDetectionStrategy.RepositoryDetectionStrategies.ANNOTATED);
 //	}
 //}

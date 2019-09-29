@@ -17,7 +17,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "mentors")
-public class Mentor {
+public class Mentor implements Person{
 
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

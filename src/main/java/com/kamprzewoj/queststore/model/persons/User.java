@@ -1,5 +1,6 @@
 package com.kamprzewoj.queststore.model.persons;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kamprzewoj.queststore.model.baskets.GroupItemBasket;
 import com.kamprzewoj.queststore.model.baskets.GroupQuestBasket;
 import com.kamprzewoj.queststore.model.cards.ItemCard;
@@ -8,12 +9,15 @@ import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -23,9 +27,9 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")
-public class User {
+public class User implements Person, Serializable {
 
-	@javax.persistence.Id
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 
@@ -49,6 +53,7 @@ public class User {
 	private String nick;
 
 	@NotBlank(message = "password is mandatory")
+	@JsonIgnore
 	private String password;  //todo <--- how save password
 
 	@Column(unique = true)

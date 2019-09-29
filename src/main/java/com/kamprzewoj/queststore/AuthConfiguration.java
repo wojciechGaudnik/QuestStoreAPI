@@ -40,10 +40,11 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers("/**").denyAll()
-				.antMatchers("/**").authenticated()
-				.antMatchers("/**").hasRole("Creepy")
-				.antMatchers("/api/rest/userLevels").hasAuthority("method_1")
+				.antMatchers("/**").permitAll()
+//				.antMatchers("/**").denyAll()
+//				.antMatchers("/**").authenticated()
+//				.antMatchers("/**").hasRole("Creepy")
+//				.antMatchers("/api/rest/userLevels").hasAuthority("method_1")
 				.and()
 				.httpBasic();
 
