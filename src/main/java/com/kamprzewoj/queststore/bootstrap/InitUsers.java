@@ -1,6 +1,7 @@
 package com.kamprzewoj.queststore.bootstrap;
 
 import com.kamprzewoj.queststore.model.common.UserLevel;
+//import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
 import com.kamprzewoj.queststore.repository.users.UsersRepository;

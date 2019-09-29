@@ -25,7 +25,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")
-public class User implements  Serializable {
+public class User{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -55,7 +55,7 @@ public class User implements  Serializable {
 	private String nick;
 
 	@NotBlank(message = "password is mandatory")
-	@JsonIgnore
+//	@JsonIgnore
 	private String password;  //todo <--- how save password
 
 //	@Column(unique = true)
@@ -77,7 +77,7 @@ public class User implements  Serializable {
 			targetEntity = GroupItemBasket.class)
 	private List<GroupItemBasket> groupItemBasketsOwned;
 
-	@NotNull(message = "userLevel is mandatory")
+//	@NotNull(message = "userLevel is mandatory")
 	@ManyToOne(
 			targetEntity = UserLevel.class)
 	@JoinColumn(name = "user_level_id")
