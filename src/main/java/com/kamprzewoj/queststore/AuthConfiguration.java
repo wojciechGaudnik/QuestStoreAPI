@@ -20,7 +20,7 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+//@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
@@ -28,9 +28,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		auth
 				.inMemoryAuthentication()
 				.withUser("root")
-					.password(passwordEncoder().encode("root"))
-					.authorities("method_1")
-					.roles("Creepy")
+					.password(passwordEncoder().encode("root")).roles("creepy")
 				.and()
 				.withUser("user").password(passwordEncoder().encode("user")).roles("user");
 
@@ -40,7 +38,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
+				.anyRequest().authenticated()
 				.antMatchers("/**").permitAll()
+				.antMatchers("/**").hasRole("creepy")
+				.antMatchers("/**").authenticated()
 //				.antMatchers("/**").denyAll()
 //				.antMatchers("/**").authenticated()
 //				.antMatchers("/**").hasRole("Creepy")
@@ -48,14 +49,14 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 				.and()
 				.httpBasic();
 
-//		http //todo <--- 100% ok
-//				.cors()
-//				.and()
-//				.csrf().disable()
-//				.authorizeRequests()
-//				.anyRequest().authenticated()
-//				.and()
-//				.httpBasic();
+		http //todo <--- 100% ok
+				.cors()
+				.and()
+				.csrf().disable()
+				.authorizeRequests()
+				.anyRequest().authenticated()
+				.and()
+				.httpBasic();
 
 	}
 
@@ -67,7 +68,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 //	@Bean
 //	CorsConfigurationSource corsConfigurationSource() {
 //		CorsConfiguration configuration = new CorsConfiguration();
-//		configuration.setAllowedOrigins(Arrays.asList("*"));
+//		configuration.setAllowedOrigins(Arrays.asList("/**"));
 //		configuration.setAllowCredentials(true);
 //		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
 //		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
@@ -75,7 +76,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 //		source.registerCorsConfiguration("/**", configuration);
 //		return source;
 //	}
-
+//
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer() {
 //		return new WebMvcConfigurerAdapter() {
