@@ -27,7 +27,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")
-public class User implements Person, Serializable {
+public class User implements  Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -84,9 +84,13 @@ public class User implements Person, Serializable {
 	@JoinColumn(name = "user_level_id")
 	private UserLevel userLevel;
 
-	@ManyToOne(
+	@ManyToMany(
 			targetEntity = UserClass.class)
-	@JoinColumn(name = "user_class_id")
+	@JoinTable(
+			uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "user_class_id"})},
+			name= "join_userclasses_user",
+			joinColumns = {@JoinColumn(name = "user_id")},
+			inverseJoinColumns = {@JoinColumn(name = "user_class_id")})
 	private UserClass userClass;
 
 	@ManyToMany(

@@ -1,6 +1,5 @@
 package com.kamprzewoj.queststore.model.common;
 
-import com.kamprzewoj.queststore.model.persons.Mentor;
 import com.kamprzewoj.queststore.model.persons.User;
 import lombok.*;
 import org.hibernate.envers.Audited;
@@ -34,16 +33,16 @@ public class UserClass {
 	private String photoUrl;
 
 	@ManyToMany(
-			targetEntity= Mentor.class)
+			targetEntity= User.class)
 	@JoinTable(
-			uniqueConstraints = {@UniqueConstraint(columnNames = {"mentor_id", "user_class_id"})},
-			name= "join_userclasses_mentors",
+			uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "user_class_id"})},
+			name= "join_userclasses_user",
 			joinColumns = {@JoinColumn(name = "user_class_id")},
-			inverseJoinColumns = {@JoinColumn(name = "mentor_id")})
-	private List<Mentor> mentors;
+			inverseJoinColumns = {@JoinColumn(name = "user_id")})
+	private List<User> users;
 
-	@OneToMany(
-			mappedBy = "userClass",
-			targetEntity = User.class)
-	private List<User> userList;
+//	@OneToMany(
+//			mappedBy = "userClass",
+//			targetEntity = User.class)
+//	private List<User> userList;
 }

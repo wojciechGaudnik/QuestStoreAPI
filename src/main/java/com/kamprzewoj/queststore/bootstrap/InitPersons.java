@@ -1,62 +1,13 @@
 package com.kamprzewoj.queststore.bootstrap;
 
 import com.kamprzewoj.queststore.model.common.UserLevel;
-import com.kamprzewoj.queststore.model.persons.Creepy;
-import com.kamprzewoj.queststore.model.persons.Mentor;
 import com.kamprzewoj.queststore.model.persons.User;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
-import com.kamprzewoj.queststore.repository.persons.CreepyRepository;
-import com.kamprzewoj.queststore.repository.persons.MentorRepository;
 import com.kamprzewoj.queststore.repository.persons.UserRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 
 class InitPersons {
-	static void creepyDB(CreepyRepository creepyRepository){
-		System.out.println(ConsoleColors.YELLOW + "Loading Creepy data:");
-		Creepy creepy = Creepy
-				.builder()
-				.firstName("Creepy first name")
-				.lastName("Creepy last name")
-				.email("test.dont@work.com")
-				.nick("root")
-				.password("root")
-				.photoUrl("http://to.jest.photo.pl")
-				.build();
-		creepyRepository.save(creepy);
-		System.out.println("Creepy saved: " + creepyRepository.count() + ConsoleColors.RESET);
-	}
 
-	static void mentorsDB(MentorRepository mentorRepository) {
-		System.out.println(ConsoleColors.YELLOW + "Loading Mentors data:");
-		Mentor mentor1 = Mentor.builder()
-				.firstName("Mentor name First")
-				.lastName("Mentor last First")
-				.email("mentor1@com.pl")
-				.nick("mentor1")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo1.pl")
-				.build();
-		Mentor mentor2 = Mentor.builder()
-				.firstName("Mentor name Second")
-				.lastName("Mentor last Second")
-				.email("mentor2@com.pl")
-				.nick("mentor2")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo2.pl")
-				.build();
-		Mentor mentor3 = Mentor.builder()
-				.firstName("Mentor name Third")
-				.lastName("Mentor last Third")
-				.email("mentor3@com.pl")
-				.nick("mentor3")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo3.pl")
-				.build();
-		mentorRepository.save(mentor1);
-		mentorRepository.save(mentor2);
-		mentorRepository.save(mentor3);
-		System.out.println("Mentors saved: " + mentorRepository.count() + ConsoleColors.RESET);
-	}
 
 	static void userDB(UserRepository userRepository, UserLevelRepository userLevelRepository) {
 		System.out.println(ConsoleColors.YELLOW + "Loading users data:");
