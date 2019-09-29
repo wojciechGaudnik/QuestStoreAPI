@@ -33,6 +33,9 @@ public class User implements Person, Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 
+	@JsonIgnore
+	private final String role = "user";
+
 	@NotBlank(message = "firstName is mandatory")
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String firstName;

@@ -1,5 +1,6 @@
 package com.kamprzewoj.queststore.model.persons;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.envers.Audited;
 
@@ -23,6 +24,9 @@ public class Creepy implements Person{
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
+
+	@JsonIgnore
+	private final String role = "creepy";
 
 	@NotBlank(message = "firstName is mandatory")
 	@Size(min = 3, max = 100, message = "length out of range ")

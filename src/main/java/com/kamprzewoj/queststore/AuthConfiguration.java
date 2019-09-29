@@ -27,10 +27,24 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 				.inMemoryAuthentication()
+
 				.withUser("root")
-					.password(passwordEncoder().encode("root")).roles("creepy")
+				.password(passwordEncoder().encode("root"))
+				.roles("creepy")
+
 				.and()
-				.withUser("user").password(passwordEncoder().encode("user")).roles("user");
+
+				.withUser("mentor")
+				.password(passwordEncoder().encode("mentor"))
+				.roles("mentor")
+
+				.and()
+
+				.withUser("user")
+				.password(passwordEncoder().encode("user"))
+				.roles("user");
+
+
 
 	}
 
@@ -38,25 +52,27 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.anyRequest().authenticated()
-				.antMatchers("/**").permitAll()
-				.antMatchers("/**").hasRole("creepy")
-				.antMatchers("/**").authenticated()
+				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
+				.antMatchers("/api/rest/users/**").hasRole("mentor")
+				.and()
+				.httpBasic();
+//				.antMatchers("/**").authenticated()
 //				.antMatchers("/**").denyAll()
 //				.antMatchers("/**").authenticated()
 //				.antMatchers("/**").hasRole("Creepy")
 //				.antMatchers("/api/rest/userLevels").hasAuthority("method_1")
-				.and()
-				.httpBasic();
+//				.anyRequest().authenticated()
+//				.antMatchers("/**").permitAll()
+
 
 		http //todo <--- 100% ok
 				.cors()
 				.and()
-				.csrf().disable()
-				.authorizeRequests()
-				.anyRequest().authenticated()
-				.and()
-				.httpBasic();
+				.csrf().disable();
+//				.authorizeRequests()
+//				.anyRequest().authenticated()
+//				.and()
+//				.httpBasic();
 
 	}
 
