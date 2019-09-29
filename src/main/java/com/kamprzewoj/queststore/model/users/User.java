@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore.model.persons;
+package com.kamprzewoj.queststore.model.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.kamprzewoj.queststore.model.baskets.GroupItemBasket;
@@ -9,8 +9,6 @@ import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import lombok.*;
 import org.hibernate.envers.Audited;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.data.rest.core.annotation.RestResource;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -33,8 +31,9 @@ public class User implements  Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Id;
 
-	@JsonIgnore
-	private final String role = "user";
+//	@JsonIgnore
+	@NotBlank(message = "firstName is mandatory")
+	private String role = "anonymous";
 
 	@NotBlank(message = "firstName is mandatory")
 	@Size(min = 3, max = 100, message = "length out of range ")
@@ -59,7 +58,7 @@ public class User implements  Serializable {
 	@JsonIgnore
 	private String password;  //todo <--- how save password
 
-	@Column(unique = true)
+//	@Column(unique = true)
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
 
@@ -91,7 +90,7 @@ public class User implements  Serializable {
 			name= "join_userclasses_user",
 			joinColumns = {@JoinColumn(name = "user_id")},
 			inverseJoinColumns = {@JoinColumn(name = "user_class_id")})
-	private UserClass userClass;
+	private List<UserClass> userClasses;
 
 	@ManyToMany(
 			targetEntity = GroupItemBasket.class)

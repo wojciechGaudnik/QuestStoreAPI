@@ -25,11 +25,11 @@ import java.util.Arrays;
 //@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
 public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 
-	private UserPrincipalDetailsService userPrincipalDetailsService;
-
-	public AuthConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
-		this.userPrincipalDetailsService = userPrincipalDetailsService;
-	}
+//	private UserPrincipalDetailsService userPrincipalDetailsService;
+//
+//	public AuthConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
+//		this.userPrincipalDetailsService = userPrincipalDetailsService;
+//	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,9 +61,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		http
 				.authorizeRequests()
 //				.antMatchers("/**").denyAll()
-				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
-				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
-				.antMatchers("/api/rest/users/**").hasRole("mentor")
+//				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
+//				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
+//				.antMatchers("/api/rest/users/**").hasRole("mentor")
+				.antMatchers("/**").hasRole("creepy")
 				.and()
 				.httpBasic();
 //				.antMatchers("/**").authenticated()
@@ -91,14 +92,14 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	DaoAuthenticationProvider authenticationProvider(){
-		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-		daoAuthenticationProvider.setUserDetailsService(userPrincipalDetailsService);
-
-		return daoAuthenticationProvider;
-	}
+//	@Bean
+//	DaoAuthenticationProvider authenticationProvider(){
+//		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+//		daoAuthenticationProvider.setUserDetailsService(userPrincipalDetailsService);
+//
+//		return daoAuthenticationProvider;
+//	}
 //	@Bean
 //	CorsConfigurationSource corsConfigurationSource() {
 //		CorsConfiguration configuration = new CorsConfiguration();

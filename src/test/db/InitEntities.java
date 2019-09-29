@@ -6,56 +6,12 @@ import com.kamprzewoj.queststore.model.common.ItemCategory;
 import com.kamprzewoj.queststore.model.common.QuestCategory;
 import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
-import com.kamprzewoj.queststore.model.persons.Creepy;
-import com.kamprzewoj.queststore.model.persons.Mentor;
-import com.kamprzewoj.queststore.model.persons.User;
+import com.kamprzewoj.queststore.model.users.User;
 import org.hibernate.Session;
 
 
 class InitEntities {
 
-	static void creepy(Session session) {
-		Creepy creepy = Creepy
-				.builder()
-				.firstName("Creepy first name")
-				.lastName("Creepy last name")
-				.email("test.dont@work.com")
-				.nick("root")
-				.password("root")
-				.photoUrl("http://to.jest.photo.pl")
-				.build();
-		session.save(creepy);
-	}
-
-	static void mentor(Session session) {
-		Mentor mentor1 = Mentor.builder()
-				.firstName("Mentor name First")
-				.lastName("Mentor last First")
-				.email("mentor1@com.pl")
-				.nick("mentor1")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo1.pl")
-				.build();
-		Mentor mentor2 = Mentor.builder()
-				.firstName("Mentor name Second")
-				.lastName("Mentor last Second")
-				.email("mentor2@com.pl")
-				.nick("mentor2")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo2.pl")
-				.build();
-		Mentor mentor3 = Mentor.builder()
-				.firstName("Mentor name Third")
-				.lastName("Mentor last Third")
-				.email("mentor3@com.pl")
-				.nick("mentor3")
-				.password("asdfg")
-				.photoUrl("http://mentor.photo3.pl")
-				.build();
-		session.save(mentor1);
-		session.save(mentor2);
-		session.save(mentor3);
-	}
 
 	static void userClass(Session session) {
 		UserClass userClass1 = UserClass.builder()
@@ -129,36 +85,83 @@ class InitEntities {
 		UserLevel userLevel3 = session.get(UserLevel.class, 3L);
 
 		User user1 = User.builder()
-				.firstName("User First")
-				.lastName("Last name First")
-				.email("user1@test.pl")
-				.nick("user nick First")
-				.password("asdf")
-				.photoUrl("http://photo1.com.pl")
-				.userLevel(userLevel1)
-				.build();
+		                 .role("user")
+				         .firstName("User First")
+				         .lastName("Last name First")
+				         .email("user1@test.pl")
+				         .nick("user nick First")
+				         .password("user")
+				         .photoUrl("http://photo1.com.pl")
+				         .userLevel(userLevel1)
+				         .build();
 		User user2 = User.builder()
-				.firstName("User Second")
-				.lastName("Last name Second")
-				.email("user2@test.pl")
-				.nick("user nick Second")
-				.password("asdff")
-				.photoUrl("http://photo2.com.pl")
-				.userLevel(userLevel2)
-				.build();
+		                 .role("user")
+				         .firstName("User Second")
+				         .lastName("Last name Second")
+				         .email("user2@test.pl")
+				         .nick("user nick Second")
+				         .password("user")
+				         .photoUrl("http://photo2.com.pl")
+				         .userLevel(userLevel2)
+				         .build();
 		User user3 = User.builder()
-				.firstName("User Third")
-				.lastName("Last name Third")
-				.email("user3@test.pl")
-				.nick("user nick Third")
-				.password("asdf")
-				.photoUrl("http://photo3.com.pl")
-				.userLevel(userLevel3)
-				.build();
+				         .role("user")
+		                 .firstName("User Third")
+				         .lastName("Last name Third")
+				         .email("user3@test.pl")
+				         .nick("user nick Third")
+				         .password("user")
+				         .photoUrl("http://photo3.com.pl")
+				         .userLevel(userLevel3)
+				         .build();
+		User mentor1 = User.builder()
+		                 .role("mentor")
+		                 .firstName("Mentor First")
+		                 .lastName("Last name First")
+		                 .email("mentor1@test.pl")
+		                 .nick("mentor nick First")
+		                 .password("mentor")
+		                 .photoUrl("http://photo1.com.pl")
+		                 .userLevel(userLevel1)
+		                 .build();
+		User mentor2 = User.builder()
+		                 .role("mentor")
+		                 .firstName("Mentor Second")
+		                 .lastName("Last name Second")
+		                 .email("mentor2@test.pl")
+		                 .nick("mentor nick Second")
+		                 .password("mentor")
+		                 .photoUrl("http://photo2.com.pl")
+		                 .userLevel(userLevel2)
+		                 .build();
+		User mentor3 = User.builder()
+		                 .role("mentor")
+		                 .firstName("Mentor Third")
+		                 .lastName("Last name Third")
+		                 .email("mentor3@test.pl")
+		                 .nick("mentor nick Third")
+		                 .password("asdf")
+		                 .photoUrl("http://photo3.com.pl")
+		                 .userLevel(userLevel3)
+		                 .build();
+		User creepy = User.builder()
+		                   .role("creepy")
+		                   .firstName("creepy Third")
+		                   .lastName("Last name Third")
+		                   .email("creepy@test.pl")
+		                   .nick("creepy nick Third")
+		                   .password("creepy")
+		                   .photoUrl("http://photo3.com.pl")
+		                   .userLevel(userLevel3)
+		                   .build();
 
 		session.save(user1);
 		session.save(user2);
 		session.save(user3);
+		session.save(mentor1);
+		session.save(mentor2);
+		session.save(mentor3);
+		session.save(creepy);
 	}
 
 	static void groupItemBasket(Session session){

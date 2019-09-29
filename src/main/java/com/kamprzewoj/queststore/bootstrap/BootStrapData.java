@@ -8,18 +8,14 @@ import com.kamprzewoj.queststore.repository.common.ItemCategoryRepository;
 import com.kamprzewoj.queststore.repository.common.QuestCategoryRepository;
 import com.kamprzewoj.queststore.repository.common.UserClassRepository;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
-import com.kamprzewoj.queststore.repository.persons.CreepyRepository;
-import com.kamprzewoj.queststore.repository.persons.MentorRepository;
-import com.kamprzewoj.queststore.repository.persons.UserRepository;
+import com.kamprzewoj.queststore.repository.users.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
 
-	private final UserRepository userRepository;
-	private final MentorRepository mentorRepository;
-	private final CreepyRepository creepyRepository;
+	private final UsersRepository usersRepository;
 	private final ItemCategoryRepository itemCategoryRepository;
 	private final QuestCategoryRepository questCategoryRepository;
 	private final UserClassRepository userClassRepository;
@@ -30,10 +26,7 @@ public class BootStrapData implements CommandLineRunner {
 	private final GroupQuestBasketRepository groupQuestBasketRepository;
 
 	public BootStrapData(
-			CreepyRepository creepyRepository,
-			UserRepository userRepository,
-			MentorRepository mentorRepository,
-			ItemCategoryRepository itemCategoryRepository,
+			UsersRepository usersRepository, ItemCategoryRepository itemCategoryRepository,
 			QuestCategoryRepository questCategoryRepository,
 			UserClassRepository userClassRepository,
 			UserLevelRepository userLevelRepository,
@@ -41,9 +34,7 @@ public class BootStrapData implements CommandLineRunner {
 			QuestCardRepository questCardRepository,
 			GroupItemBasketRepository groupItemBasketRepository,
 			GroupQuestBasketRepository groupQuestBasketRepository) {
-		this.userRepository = userRepository;
-		this.mentorRepository = mentorRepository;
-		this.creepyRepository = creepyRepository;
+		this.usersRepository = usersRepository;
 		this.itemCategoryRepository = itemCategoryRepository;
 		this.questCategoryRepository = questCategoryRepository;
 		this.userClassRepository = userClassRepository;
@@ -56,21 +47,21 @@ public class BootStrapData implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		InitPersons.creepyDB(creepyRepository);
-		InitPersons.mentorsDB(mentorRepository);
 
 		InitCommons.userClassesDB(userClassRepository);
 		InitCommons.userLevelsDB(userLevelRepository);
 		InitCommons.itemCategoryDB(itemCategoryRepository);
 		InitCommons.questCategoryDB(questCategoryRepository);
 
-		InitPersons.userDB(userRepository, userLevelRepository);
-
 		InitCards.itemCardsDB(itemCardRepository, itemCategoryRepository);
 		InitCards.questCardDB(questCardRepository, questCategoryRepository);
 
-		InitBaskets.groupItemBasketDB(groupItemBasketRepository, userRepository);
-		InitBaskets.groupQuestBasketDB(groupQuestBasketRepository, userRepository);
+		InitUsers.userDB(usersRepository, userLevelRepository);
+
+		InitBaskets.groupItemBasketDB(groupItemBasketRepository, usersRepository);
+		InitBaskets.groupQuestBasketDB(groupQuestBasketRepository, usersRepository);
+
+
 
 //		InitManyToMany.tieMentorAndUserClass(mentorRepository, userClassRepository);
 
@@ -78,18 +69,4 @@ public class BootStrapData implements CommandLineRunner {
 //		ItemCard itemCard = new ItemCard("First Cart", itemCategory);
 //		itemCartRepository.save(itemCard);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -8,7 +8,7 @@ import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import com.kamprzewoj.queststore.model.persons.Creepy;
 import com.kamprzewoj.queststore.model.persons.Mentor;
-import com.kamprzewoj.queststore.model.persons.User;
+import com.kamprzewoj.queststore.model.users.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

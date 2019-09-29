@@ -3,7 +3,7 @@ package com.kamprzewoj.queststore.model.cards;
 import com.kamprzewoj.queststore.model.baskets.GroupItemBasket;
 import com.kamprzewoj.queststore.model.common.ItemCategory;
 import com.kamprzewoj.queststore.model.common.UserLevel;
-import com.kamprzewoj.queststore.model.persons.User;
+import com.kamprzewoj.queststore.model.users.User;
 import lombok.*;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Range;

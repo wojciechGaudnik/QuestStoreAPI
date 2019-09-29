@@ -2,7 +2,7 @@ package com.kamprzewoj.queststore.model.common;
 
 import com.kamprzewoj.queststore.model.cards.ItemCard;
 import com.kamprzewoj.queststore.model.cards.QuestCard;
-import com.kamprzewoj.queststore.model.persons.User;
+import com.kamprzewoj.queststore.model.users.User;
 import lombok.*;
 import org.hibernate.envers.Audited;
 import org.hibernate.validator.constraints.Range;
