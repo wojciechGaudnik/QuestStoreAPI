@@ -8,7 +8,7 @@ import com.kamprzewoj.queststore.repository.common.ItemCategoryRepository;
 import com.kamprzewoj.queststore.repository.common.QuestCategoryRepository;
 import com.kamprzewoj.queststore.repository.common.UserClassRepository;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
-import com.kamprzewoj.queststore.repository.users.UsersRepository;
+import com.kamprzewoj.queststore.repository.users.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -18,7 +18,7 @@ public class BootStrapData implements CommandLineRunner {
 
 	private PasswordEncoder passwordEncoder;
 
-	private final UsersRepository usersRepository;
+	private final UserRepository usersRepository;
 	private final ItemCategoryRepository itemCategoryRepository;
 	private final QuestCategoryRepository questCategoryRepository;
 	private final UserClassRepository userClassRepository;
@@ -29,7 +29,7 @@ public class BootStrapData implements CommandLineRunner {
 	private final GroupQuestBasketRepository groupQuestBasketRepository;
 
 	public BootStrapData(
-			PasswordEncoder passwordEncoder, UsersRepository usersRepository, ItemCategoryRepository itemCategoryRepository,
+			PasswordEncoder passwordEncoder, UserRepository usersRepository, ItemCategoryRepository itemCategoryRepository,
 			QuestCategoryRepository questCategoryRepository,
 			UserClassRepository userClassRepository,
 			UserLevelRepository userLevelRepository,

@@ -1,6 +1,6 @@
 package com.kamprzewoj.queststore.security;
 
-import com.kamprzewoj.queststore.repository.users.UsersRepository;
+import com.kamprzewoj.queststore.repository.users.UserRepository;
 import com.kamprzewoj.queststore.tools.ROLE;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class WebSecurity {
 
-	private UsersRepository usersRepository;
+	private UserRepository usersRepository;
 
-	public WebSecurity(UsersRepository usersRepository) {
+	public WebSecurity(UserRepository usersRepository) {
 		this.usersRepository = usersRepository;
 	}
 

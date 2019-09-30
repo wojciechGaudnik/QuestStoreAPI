@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
+				.antMatchers(HttpMethod.PUT,"/api/userServices/buyItemCard/**").hasRole(ROLE.USER)
 				.antMatchers(HttpMethod.GET,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
 				.antMatchers(HttpMethod.GET, "/api/login/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)

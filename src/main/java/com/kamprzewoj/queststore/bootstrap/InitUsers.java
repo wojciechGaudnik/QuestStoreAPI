@@ -3,14 +3,14 @@ package com.kamprzewoj.queststore.bootstrap;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
-import com.kamprzewoj.queststore.repository.users.UsersRepository;
+import com.kamprzewoj.queststore.repository.users.UserRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 class InitUsers {
 
 
-	static void userDB(UsersRepository usersRepository, UserLevelRepository userLevelRepository, PasswordEncoder passwordEncoder) {
+	static void userDB(UserRepository usersRepository, UserLevelRepository userLevelRepository, PasswordEncoder passwordEncoder) {
 			System.out.println(ConsoleColors.YELLOW + "Loading users data:");
 			UserLevel userLevel1 = userLevelRepository.findById(1L).get();
 			UserLevel userLevel2 = userLevelRepository.findById(2L).get();
@@ -25,6 +25,7 @@ class InitUsers {
 			                 .password(passwordEncoder.encode("user"))
 			                 .photoUrl("http://photo1.com.pl")
 			                 .userLevel(userLevel1)
+			                 .coins(1_000_000)
 			                 .build();
 			User user2 = User.builder()
 			                 .role("user")

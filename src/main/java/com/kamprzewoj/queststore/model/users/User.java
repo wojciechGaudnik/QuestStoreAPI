@@ -9,6 +9,7 @@ import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import lombok.*;
 import org.hibernate.envers.Audited;
+import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -61,6 +62,9 @@ public class User{
 //	@Column(unique = true)
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
+
+	@Range(min = 0L, max = 100_000_000, message = "coins out of range ")
+	private int coins;
 
 	// todo https://thoughts-on-java.org/hibernate-tips-elementcollection/
 //	private List<ItemCard> endedItems;

@@ -5,11 +5,11 @@ import com.kamprzewoj.queststore.model.baskets.GroupQuestBasket;
 import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.repository.baskets.GroupItemBasketRepository;
 import com.kamprzewoj.queststore.repository.baskets.GroupQuestBasketRepository;
-import com.kamprzewoj.queststore.repository.users.UsersRepository;
+import com.kamprzewoj.queststore.repository.users.UserRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 
 class InitBaskets {
-	static void groupItemBasketDB(GroupItemBasketRepository groupItemBasketRepository, UsersRepository usersRepository){
+	static void groupItemBasketDB(GroupItemBasketRepository groupItemBasketRepository, UserRepository usersRepository){
 		System.out.println(ConsoleColors.YELLOW + "Loading groupItemBasket data:");
 		User user1 = usersRepository.findById(1L).get();
 		User user2 = usersRepository.findById(2L).get();
@@ -38,7 +38,7 @@ class InitBaskets {
 		System.out.println("GroupItem saved: " + groupItemBasketRepository.count() + ConsoleColors.RESET);
 	}
 
-	static void groupQuestBasketDB(GroupQuestBasketRepository groupQuestBasketRepository, UsersRepository userRepository){
+	static void groupQuestBasketDB(GroupQuestBasketRepository groupQuestBasketRepository, UserRepository userRepository){
 		System.out.println(ConsoleColors.YELLOW + "Loading groupQuestBasket data:");
 		User user1 = userRepository.findById(1L).get();
 		User user2 = userRepository.findById(2L).get();

@@ -20,7 +20,7 @@ class InitCards {
 		ItemCard itemCard1 = ItemCard.builder()
 				.name("Item Card First")
 				.photoUrl("http://test.photo1.com")
-				.value(1)
+				.value(100)
 				.description("Item Card Decryption First")
 				.allowedGroupBuy(false)
 				.itemCategory(itemCategory1)
