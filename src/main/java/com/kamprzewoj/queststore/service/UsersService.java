@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class UsersService{
 
 	private UserPrincipalDetailsService userPrincipalDetailsService;
-	private  UsersRepository usersRepository;
+	private  UsersRepository usersRepository;  //todo <--- remove !!!
 
 		public UsersService(UsersRepository usersRepository, UserPrincipalDetailsService userPrincipalDetailsService) {
 			this.usersRepository = usersRepository;
