@@ -1,5 +1,6 @@
 package com.kamprzewoj.queststore.security;
 
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -22,52 +23,66 @@ import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
+//@EnableAutoConfiguration
 //@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
-public class AuthConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-//	private UserPrincipalDetailsService userPrincipalDetailsService;
-//
-//	public AuthConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
-//		this.userPrincipalDetailsService = userPrincipalDetailsService;
-//	}
+	private UserPrincipalDetailsService userPrincipalDetailsService;
+
+	public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
+		this.userPrincipalDetailsService = userPrincipalDetailsService;
+	}
 
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth
-				.inMemoryAuthentication()
-
-				.withUser("root")
-				.password(passwordEncoder().encode("root"))
-				.roles("creepy")
-
-				.and()
-
-				.withUser("mentor")
-				.password(passwordEncoder().encode("mentor"))
-				.roles("mentor")
-
-				.and()
-
-				.withUser("user")
-				.password(passwordEncoder().encode("user"))
-				.roles("user");
-
-
-
+	protected void configure(AuthenticationManagerBuilder auth) {
+		auth.authenticationProvider(authenticationProvider());
 	}
+
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth
+//				.inMemoryAuthentication()
+//
+//				.withUser("root")
+//				.password(passwordEncoder().encode("root"))
+//				.roles("creepy")
+//
+//				.and()
+//
+//				.withUser("mentor")
+//				.password(passwordEncoder().encode("mentor"))
+//				.roles("mentor")
+//
+//				.and()
+//
+//				.withUser("user")
+//				.password(passwordEncoder().encode("user"))
+//				.roles("user");
+//
+//
+//
+//	}
+
+
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
+//				.antMatchers("/**").authenticated()
+//				.anyRequest().authenticated()
 //				.antMatchers("/**").denyAll()
 //				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
 //				.antMatchers("/api/rest/mentors/**").hasRole("creepy")
 //				.antMatchers("/api/rest/users/**").hasRole("mentor")
+//				.antMatchers("/**").hasRole("creepy")
+				.antMatchers("/test/**").hasRole("mentor")
 				.antMatchers("/**").hasRole("creepy")
+				.anyRequest().authenticated()
 				.and()
+
 				.httpBasic();
-//				.antMatchers("/**").authenticated()
+//
 //				.antMatchers("/**").denyAll()
 //				.antMatchers("/**").authenticated()
 //				.antMatchers("/**").hasRole("Creepy")
@@ -76,10 +91,10 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 //				.antMatchers("/**").permitAll()
 
 
-		http //todo <--- 100% ok
-				.cors()
-				.and()
-				.csrf().disable();
+//		http //todo <--- 100% ok
+//				.cors()
+//				.and()
+//				.csrf().disable();
 //				.authorizeRequests()
 //				.anyRequest().authenticated()
 //				.and()
@@ -92,14 +107,15 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		return new BCryptPasswordEncoder();
 	}
 
-//	@Bean
-//	DaoAuthenticationProvider authenticationProvider(){
-//		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-//		daoAuthenticationProvider.setUserDetailsService(userPrincipalDetailsService);
-//
-//		return daoAuthenticationProvider;
-//	}
+	@Bean
+	DaoAuthenticationProvider authenticationProvider(){
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+		daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
+
+		return daoAuthenticationProvider;
+	}
+
 //	@Bean
 //	CorsConfigurationSource corsConfigurationSource() {
 //		CorsConfiguration configuration = new CorsConfiguration();
@@ -111,7 +127,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 //		source.registerCorsConfiguration("/**", configuration);
 //		return source;
 //	}
-//
+
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer() {
 //		return new WebMvcConfigurerAdapter() {
@@ -120,6 +136,44 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 //				registry.addMapping("/**").allowedOrigins("http://localhost:8080");
 //			}
 //		};
+//	}
+
+
+
+
+//	private UserPrincipalDetailsService userPrincipalDetailsService;
+//
+//	public SecurityConfiguration(UserPrincipalDetailsService userPrincipalDetailsService) {
+//		this.userPrincipalDetailsService = userPrincipalDetailsService;
+//	}
+//
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) {
+//		auth.authenticationProvider(authenticationProvider());
+//	}
+//
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		http
+//				.authorizeRequests()
+//				.anyRequest().authenticated()
+//				.and()
+//				.antMatcher("/api/rest**")
+//				.formLogin();
+//	}
+//
+//	@Bean
+//	DaoAuthenticationProvider authenticationProvider(){
+//		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+//		daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+//		daoAuthenticationProvider.setUserDetailsService(this.userPrincipalDetailsService);
+//
+//		return daoAuthenticationProvider;
+//	}
+//
+//	@Bean
+//	PasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
 //	}
 
 }

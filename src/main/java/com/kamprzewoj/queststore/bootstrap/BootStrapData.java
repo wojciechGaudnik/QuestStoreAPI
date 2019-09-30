@@ -10,10 +10,13 @@ import com.kamprzewoj.queststore.repository.common.UserClassRepository;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
 import com.kamprzewoj.queststore.repository.users.UsersRepository;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BootStrapData implements CommandLineRunner {
+
+	private PasswordEncoder passwordEncoder;
 
 	private final UsersRepository usersRepository;
 	private final ItemCategoryRepository itemCategoryRepository;
@@ -26,7 +29,7 @@ public class BootStrapData implements CommandLineRunner {
 	private final GroupQuestBasketRepository groupQuestBasketRepository;
 
 	public BootStrapData(
-			UsersRepository usersRepository, ItemCategoryRepository itemCategoryRepository,
+			PasswordEncoder passwordEncoder, UsersRepository usersRepository, ItemCategoryRepository itemCategoryRepository,
 			QuestCategoryRepository questCategoryRepository,
 			UserClassRepository userClassRepository,
 			UserLevelRepository userLevelRepository,
@@ -34,6 +37,7 @@ public class BootStrapData implements CommandLineRunner {
 			QuestCardRepository questCardRepository,
 			GroupItemBasketRepository groupItemBasketRepository,
 			GroupQuestBasketRepository groupQuestBasketRepository) {
+		this.passwordEncoder = passwordEncoder;
 		this.usersRepository = usersRepository;
 		this.itemCategoryRepository = itemCategoryRepository;
 		this.questCategoryRepository = questCategoryRepository;
@@ -56,7 +60,7 @@ public class BootStrapData implements CommandLineRunner {
 		InitCards.itemCardsDB(itemCardRepository, itemCategoryRepository);
 		InitCards.questCardDB(questCardRepository, questCategoryRepository);
 
-		InitUsers.userDB(usersRepository, userLevelRepository);
+		InitUsers.userDB(usersRepository, userLevelRepository, passwordEncoder);
 
 		InitBaskets.groupItemBasketDB(groupItemBasketRepository, usersRepository);
 		InitBaskets.groupQuestBasketDB(groupQuestBasketRepository, usersRepository);

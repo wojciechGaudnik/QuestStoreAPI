@@ -1,16 +1,16 @@
 package com.kamprzewoj.queststore.bootstrap;
 
 import com.kamprzewoj.queststore.model.common.UserLevel;
-//import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
 import com.kamprzewoj.queststore.repository.users.UsersRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 class InitUsers {
 
 
-	static void userDB(UsersRepository usersRepository, UserLevelRepository userLevelRepository) {
+	static void userDB(UsersRepository usersRepository, UserLevelRepository userLevelRepository, PasswordEncoder passwordEncoder) {
 			System.out.println(ConsoleColors.YELLOW + "Loading users data:");
 			UserLevel userLevel1 = userLevelRepository.findById(1L).get();
 			UserLevel userLevel2 = userLevelRepository.findById(2L).get();
@@ -21,8 +21,8 @@ class InitUsers {
 			                 .firstName("User First")
 			                 .lastName("Last name First")
 			                 .email("user1@test.pl")
-			                 .nick("user nick First")
-			                 .password("user")
+			                 .nick("user1")
+			                 .password(passwordEncoder.encode("user"))
 			                 .photoUrl("http://photo1.com.pl")
 			                 .userLevel(userLevel1)
 			                 .build();
@@ -31,8 +31,8 @@ class InitUsers {
 			                 .firstName("User Second")
 			                 .lastName("Last name Second")
 			                 .email("user2@test.pl")
-			                 .nick("user nick Second")
-			                 .password("user")
+			                 .nick("user2")
+			                 .password(passwordEncoder.encode("user"))
 			                 .photoUrl("http://photo2.com.pl")
 			                 .userLevel(userLevel2)
 			                 .build();
@@ -41,8 +41,8 @@ class InitUsers {
 			                 .firstName("User Third")
 			                 .lastName("Last name Third")
 			                 .email("user3@test.pl")
-			                 .nick("user nick Third")
-			                 .password("user")
+			                 .nick("user3")
+			                 .password(passwordEncoder.encode("user"))
 			                 .photoUrl("http://photo3.com.pl")
 			                 .userLevel(userLevel3)
 			                 .build();
@@ -51,8 +51,8 @@ class InitUsers {
 			                   .firstName("Mentor First")
 			                   .lastName("Last name First")
 			                   .email("mentor1@test.pl")
-			                   .nick("mentor nick First")
-			                   .password("mentor")
+			                   .nick("mentor1")
+			                   .password(passwordEncoder.encode("mentor"))
 			                   .photoUrl("http://photo1.com.pl")
 			                   .userLevel(userLevel1)
 			                   .build();
@@ -61,18 +61,18 @@ class InitUsers {
 			                   .firstName("Mentor Second")
 			                   .lastName("Last name Second")
 			                   .email("mentor2@test.pl")
-			                   .nick("mentor nick Second")
-			                   .password("mentor")
+			                   .nick("mentor2")
+			                   .password(passwordEncoder.encode("mentor"))
 			                   .photoUrl("http://photo2.com.pl")
 			                   .userLevel(userLevel2)
 			                   .build();
 			User mentor3 = User.builder()
-			                   .role("mentor")
+			                   .role("mentorT")
 			                   .firstName("Mentor Third")
 			                   .lastName("Last name Third")
 			                   .email("mentor3@test.pl")
-			                   .nick("mentor nick Third")
-			                   .password("asdf")
+			                   .nick("mentor3")
+			                   .password(passwordEncoder.encode("mentorT"))
 			                   .photoUrl("http://photo3.com.pl")
 			                   .userLevel(userLevel3)
 			                   .build();
@@ -81,8 +81,8 @@ class InitUsers {
 			                  .firstName("creepy Third")
 			                  .lastName("Last name Third")
 			                  .email("creepy@test.pl")
-			                  .nick("creepy nick Third")
-			                  .password("creepy")
+			                  .nick("root")
+			                  .password(passwordEncoder.encode("root"))
 			                  .photoUrl("http://photo3.com.pl")
 			                  .userLevel(userLevel3)
 			                  .build();
