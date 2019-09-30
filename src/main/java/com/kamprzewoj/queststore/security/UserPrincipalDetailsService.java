@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class UserPrincipalDetailsService implements UserDetailsService {
 
 	private UsersRepository usersRepository;
+	private User user;
 
 	public UserPrincipalDetailsService(UsersRepository usersRepository) {
 		this.usersRepository = usersRepository;
@@ -18,7 +19,11 @@ public class UserPrincipalDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-		User user = this.usersRepository.findByNick(s);
+		this.user = this.usersRepository.findByNick(s);
 		return new UserPrincipal(user);
+	}
+
+	public User getUser(){
+		return this.user;
 	}
 }

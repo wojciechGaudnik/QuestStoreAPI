@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore;
+package com.kamprzewoj.queststore.errorHandlers;
 
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 import org.springframework.http.HttpHeaders;

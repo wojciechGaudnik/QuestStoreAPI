@@ -10,6 +10,19 @@ import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactor
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 
+//todo @RestControllerEndpoint()  //todo <--- read about it
+// todo --- how mount new end point without crash existing from REST ? <--- siadz na spotkojnie i
+// todo przelec od gotowych end pontow, one musza być jakimś kontrolerem wystawiane !!! znajdz i NADPISZ A JAK TO NIE PUJDZIE
+// todo TO MIKRO SERVIS 3 <
+
+// todo --- I WTEDY TEZ ZOBACZY CZY ZŁAPANIE WYJĄTKU W NIM ROZWIĄZĘ PROBLEM Internal Server Error
+
+//todo why lov hybernate or jpa exceptions aren't cath globally
+//TODO 2019-09-19 01:33:58.726 ERROR 6187 --- [nio-8080-exec-7] o.s.d.r.w.---> RepositoryRestExceptionHandler <---: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+//
+//org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
+
+
 @SpringBootApplication()
 public class QuestStoreApplication {
 
@@ -19,7 +32,6 @@ public class QuestStoreApplication {
 
 	@Bean
 	public ServletWebServerFactory servletContainer() {
-		// Enable SSL Trafic
 		TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
 			@Override
 			protected void postProcessContext(Context context) {
@@ -32,17 +44,10 @@ public class QuestStoreApplication {
 			}
 		};
 
-		// Add HTTP to HTTPS redirect
 		tomcat.addAdditionalTomcatConnectors(httpToHttpsRedirectConnector());
-
 		return tomcat;
 	}
 
-	/*
-	We need to redirect from HTTP to HTTPS. Without SSL, this application used
-	port 8082. With SSL it will use port 8443. So, any request for 8082 needs to be
-	redirected to HTTPS on 8443.
-	 */
 	private Connector httpToHttpsRedirectConnector() {
 		Connector connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
 		connector.setScheme("http");
@@ -53,15 +58,5 @@ public class QuestStoreApplication {
 	}
 }
 
-// todo --- how mount new end point without crash existing from REST ? <--- siadz na spotkojnie i
-// todo przelec od gotowych end pontow, one musza być jakimś kontrolerem wystawiane !!! znajdz i NADPISZ A JAK TO NIE PUJDZIE
-// todo TO MIKRO SERVIS 3 <
-
-// todo --- I WTEDY TEZ ZOBACZY CZY ZŁAPANIE WYJĄTKU W NIM ROZWIĄZĘ PROBLEM Internal Server Error
-
-//todo why lov hybernate or jpa exceptions aren't cath globally
-//TODO 2019-09-19 01:33:58.726 ERROR 6187 --- [nio-8080-exec-7] o.s.d.r.w.---> RepositoryRestExceptionHandler <---: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
-//
-//org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
 
