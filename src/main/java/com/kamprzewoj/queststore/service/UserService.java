@@ -23,13 +23,19 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 
-	public boolean buyItem(Long id) {
+	public boolean buyItemCard(Long id) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		User user = userRepository.findByNick(authentication.getName());
 		Optional<ItemCard> itemCardOptional = itemCardRepository.findById(id);
 		if (itemCardOptional.isEmpty()) return false;
 		ItemCard itemCard = itemCardOptional.get();
-		if (user.getCoins() >= itemCard.getValue()) {
+
+		log.error("---------------------------------------");
+		log.error(String.valueOf(user.getUserLevel().getValue()));
+		log.error(String.valueOf(itemCard.getUserLevel().getValue()));
+
+		if (user.getCoins() >= itemCard.getValue()
+				&& user.getUserLevel().getValue() >= itemCard.getUserLevel().getValue()) {
 			user.getItemCards().add(itemCard);
 			user.setCoins(user.getCoins() - itemCard.getValue());
 			userRepository.save(user);
@@ -38,4 +44,8 @@ public class UserService {
 			return false;
 		}
 	}
+
+
+
+
 }

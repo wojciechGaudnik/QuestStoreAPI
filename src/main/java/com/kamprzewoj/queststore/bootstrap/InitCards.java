@@ -4,23 +4,32 @@ import com.kamprzewoj.queststore.model.cards.ItemCard;
 import com.kamprzewoj.queststore.model.cards.QuestCard;
 import com.kamprzewoj.queststore.model.common.ItemCategory;
 import com.kamprzewoj.queststore.model.common.QuestCategory;
+import com.kamprzewoj.queststore.model.common.UserLevel;
 import com.kamprzewoj.queststore.repository.cards.ItemCardRepository;
 import com.kamprzewoj.queststore.repository.cards.QuestCardRepository;
 import com.kamprzewoj.queststore.repository.common.ItemCategoryRepository;
 import com.kamprzewoj.queststore.repository.common.QuestCategoryRepository;
+import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 
 
 class InitCards {
-	static void itemCardsDB(ItemCardRepository itemCardRepository, ItemCategoryRepository itemCategoryRepository){
+	static void itemCardsDB(ItemCardRepository itemCardRepository,
+	                        ItemCategoryRepository itemCategoryRepository,
+	                        UserLevelRepository userLevelRepository){
 		System.out.println(ConsoleColors.YELLOW + "Loading itemCategory data:");
 		ItemCategory itemCategory1 = itemCategoryRepository.findById(1L).get();
 		ItemCategory itemCategory2 = itemCategoryRepository.findById(2L).get();
 		ItemCategory itemCategory3 = itemCategoryRepository.findById(3L).get();
+		UserLevel userLevel1 = userLevelRepository.findById(1L).get();
+		UserLevel userLevel2 = userLevelRepository.findById(2L).get();
+		UserLevel userLevel3 = userLevelRepository.findById(3L).get();
+
 		ItemCard itemCard1 = ItemCard.builder()
 				.name("Item Card First")
 				.photoUrl("http://test.photo1.com")
 				.value(100)
+				.userLevel(userLevel1)
 				.description("Item Card Decryption First")
 				.allowedGroupBuy(false)
 				.itemCategory(itemCategory1)
@@ -29,6 +38,7 @@ class InitCards {
 				.name("Item Card Second")
 				.photoUrl("http://test.photo2.com")
 				.value(1)
+				.userLevel(userLevel2)
 				.description("Item Card Decryption Second")
 				.allowedGroupBuy(false)
 				.itemCategory(itemCategory2)
@@ -37,7 +47,8 @@ class InitCards {
 				.name("Item Card Third")
 				.photoUrl("http://test.photo3.com")
 				.value(1)
-				.description("Item Card Decryption Third")
+			    .userLevel(userLevel3)
+			    .description("Item Card Decryption Third")
 				.allowedGroupBuy(false)
 				.itemCategory(itemCategory3)
 				.build();
@@ -47,15 +58,21 @@ class InitCards {
 		System.out.println("ItemCard saved: " + itemCardRepository.count() + ConsoleColors.RESET);
 	}
 
-	static void questCardDB(QuestCardRepository questCardRepository, QuestCategoryRepository questCategoryRepository) {
+	static void questCardDB(QuestCardRepository questCardRepository,
+	                        QuestCategoryRepository questCategoryRepository,
+	                        UserLevelRepository userLevelRepository) {
 		System.out.println(ConsoleColors.YELLOW + "Loading questCategory data:");
 		QuestCategory questCategory1 = questCategoryRepository.findById(1L).get();
 		QuestCategory questCategory2 = questCategoryRepository.findById(2L).get();
 		QuestCategory questCategory3 = questCategoryRepository.findById(3L).get();
+		UserLevel userLevel1 = userLevelRepository.findById(1L).get();
+		UserLevel userLevel2 = userLevelRepository.findById(1L).get();
+		UserLevel userLevel3 = userLevelRepository.findById(1L).get();
 		QuestCard questCard1 = QuestCard.builder()
 				.name("Quest Card First")
 				.photoUrl("http://test.photo1.com")
 				.value(1)
+		        .userLevel(userLevel1)
 				.description("Quest Card Decryption First")
 				.allowedGroupBuy(false)
 				.questCategory(questCategory1)
@@ -64,6 +81,7 @@ class InitCards {
 				.name("Quest Card Second")
 				.photoUrl("http://test.photo2.com")
 				.value(2)
+				.userLevel(userLevel2)
 				.description("Quest Card Decryption Second")
 				.allowedGroupBuy(false)
 				.questCategory(questCategory2)
@@ -72,6 +90,7 @@ class InitCards {
 				.name("Quest Card Third")
 				.photoUrl("http://test.photo3.com")
 				.value(3)
+				.userLevel(userLevel3)
 				.description("Quest Card Decryption Third")
 				.allowedGroupBuy(false)
 				.questCategory(questCategory3)

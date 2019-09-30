@@ -8,13 +8,17 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Slf4j
 @Service
 public class LoginService implements ROLE {
 
-	public Collection<? extends GrantedAuthority> login() {
+	public Optional<Collection<? extends GrantedAuthority>> login() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return authentication.getAuthorities();
+		if (getAllRoles().stream().anyMatch(r -> r.equals(authentication.getAuthorities().toString()))) {
+			return Optional.of(authentication.getAuthorities());
+		}
+		return Optional.empty();
 	}
 }

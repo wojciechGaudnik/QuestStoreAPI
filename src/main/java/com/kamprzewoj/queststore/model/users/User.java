@@ -66,10 +66,13 @@ public class User{
 	@Range(min = 0L, max = 100_000_000, message = "coins out of range ")
 	private int coins;
 
+	private int coinsAllUserReachedHistorical;
 	// todo https://thoughts-on-java.org/hibernate-tips-elementcollection/
-//	private List<ItemCard> endedItems;
-//
-//	private List<QuestCard> endedQuests;
+	@ElementCollection
+	private List<ItemCard> endedItems;
+
+	@ElementCollection
+	private List<QuestCard> endedQuests;
 
 	@OneToMany(
 			mappedBy = "owner",

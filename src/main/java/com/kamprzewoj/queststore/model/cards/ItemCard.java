@@ -50,6 +50,7 @@ public class ItemCard {//todo implement Serializable  ???
 
 	private boolean allowedGroupBuy;
 
+	//todo should be mandatory
 	@ManyToOne(
 			targetEntity = UserLevel.class)
 	@JoinColumn(name = "user_level_id")

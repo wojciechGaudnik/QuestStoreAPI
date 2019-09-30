@@ -9,11 +9,11 @@ public interface ROLE {
 	String MENTOR = "mentor";
 	String USER = "user";
 
-	default List<String> getAll(){
+	default List<String> getAllRoles(){
 		return new ArrayList<>() {{
-			add(CREEPY);
-			add(MENTOR);
-			add(USER);
+			add("[ROLE_" + CREEPY + "]");
+			add("[ROLE_" + MENTOR + "]");
+			add("[ROLE_" + USER + "]");
 		}};
 	}
 }
