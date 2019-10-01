@@ -36,7 +36,7 @@ class InitUsers {
 			                 .lastName("Last name First")
 			                 .email("user1@test.pl")
 			                 .nick("user1")
-			                 .password(passwordEncoder.encode("user"))
+			                 .password(passwordEncoder.encode("user1"))
 			                 .photoUrl("http://photo1.com.pl")
 			                 .userLevel(userLevel1)
 			                 .coins(1_000_000)
@@ -52,7 +52,7 @@ class InitUsers {
 			                 .lastName("Last name Second")
 			                 .email("user2@test.pl")
 			                 .nick("user2")
-			                 .password(passwordEncoder.encode("user"))
+			                 .password(passwordEncoder.encode("user2"))
 			                 .photoUrl("http://photo2.com.pl")
 			                 .userLevel(userLevel2)
 			                 .build();
@@ -62,7 +62,7 @@ class InitUsers {
 			                 .lastName("Last name Third")
 			                 .email("user3@test.pl")
 			                 .nick("user3")
-			                 .password(passwordEncoder.encode("user"))
+			                 .password(passwordEncoder.encode("user3"))
 			                 .photoUrl("http://photo3.com.pl")
 			                 .userLevel(userLevel3)
 			                 .build();
