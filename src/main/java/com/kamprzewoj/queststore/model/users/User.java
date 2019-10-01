@@ -8,8 +8,14 @@ import com.kamprzewoj.queststore.model.cards.QuestCard;
 import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import lombok.*;
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.IndexColumn;
+import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Range;
+import org.testng.annotations.Test;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -17,6 +23,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -26,7 +34,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")
-public class User{
+public class User implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -67,9 +75,17 @@ public class User{
 	private int coins;
 
 	private int coinsAllUserReachedHistorical;
+
 	// todo https://thoughts-on-java.org/hibernate-tips-elementcollection/
+	//todo https://www.youtube.com/watch?v=kk207HAym_I
+	@NotAudited
 	@ElementCollection
-	private List<ItemCard> endedItems;
+	@CollectionTable(
+			name = "endedItemstest",
+			joinColumns = @JoinColumn(name = "CARD_ID"))
+	@GenericGenerator(name="sequence-gen", strategy="sequence")
+	@CollectionId(columns = { @Column(name="users_old_item_cards") }, generator = "sequence-gen", type = @Type(type="long"))
+	private Collection<ItemCard> endedItems;
 
 	@ElementCollection
 	private List<QuestCard> endedQuests;

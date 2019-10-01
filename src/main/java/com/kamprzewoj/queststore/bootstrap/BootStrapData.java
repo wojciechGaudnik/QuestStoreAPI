@@ -60,7 +60,7 @@ public class BootStrapData implements CommandLineRunner {
 		InitCards.itemCardsDB(itemCardRepository, itemCategoryRepository, userLevelRepository);
 		InitCards.questCardDB(questCardRepository, questCategoryRepository, userLevelRepository);
 
-		InitUsers.userDB(usersRepository, userLevelRepository, passwordEncoder);
+		InitUsers.userDB(usersRepository, userLevelRepository, passwordEncoder, itemCardRepository);
 
 		InitBaskets.groupItemBasketDB(groupItemBasketRepository, usersRepository);
 		InitBaskets.groupQuestBasketDB(groupQuestBasketRepository, usersRepository);

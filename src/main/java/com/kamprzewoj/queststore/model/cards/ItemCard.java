@@ -12,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "item_cards")
-public class ItemCard {//todo implement Serializable  ???
+public class ItemCard implements Serializable {//todo implement Serializable  ???
 
 	@javax.persistence.Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

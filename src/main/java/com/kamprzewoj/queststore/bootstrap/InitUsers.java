@@ -1,20 +1,34 @@
 package com.kamprzewoj.queststore.bootstrap;
 
+import com.kamprzewoj.queststore.model.cards.ItemCard;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import com.kamprzewoj.queststore.model.users.User;
+import com.kamprzewoj.queststore.repository.cards.ItemCardRepository;
 import com.kamprzewoj.queststore.repository.common.UserLevelRepository;
 import com.kamprzewoj.queststore.repository.users.UserRepository;
 import com.kamprzewoj.queststore.tools.ConsoleColors;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 class InitUsers {
 
 
-	static void userDB(UserRepository usersRepository, UserLevelRepository userLevelRepository, PasswordEncoder passwordEncoder) {
-			System.out.println(ConsoleColors.YELLOW + "Loading users data:");
-			UserLevel userLevel1 = userLevelRepository.findById(1L).get();
-			UserLevel userLevel2 = userLevelRepository.findById(2L).get();
-			UserLevel userLevel3 = userLevelRepository.findById(3L).get();
+	static void userDB(UserRepository usersRepository,
+	                   UserLevelRepository userLevelRepository,
+	                   PasswordEncoder passwordEncoder,
+	                   ItemCardRepository itemCardRepository) {
+		System.out.println(ConsoleColors.YELLOW + "Loading users data:");
+		UserLevel userLevel1 = userLevelRepository.findById(1L).get();
+		UserLevel userLevel2 = userLevelRepository.findById(2L).get();
+		UserLevel userLevel3 = userLevelRepository.findById(3L).get();
+		ItemCard itemCard1 = itemCardRepository.findById(1L).get();
+		ItemCard itemCard1bis = itemCardRepository.findById(1L).get();
+		ItemCard itemCard2 = itemCardRepository.findById(2L).get();
+		itemCard1.setUuid(UUID.randomUUID());
+		itemCard1bis.setUuid(UUID.randomUUID());
+		itemCard2.setUuid(UUID.randomUUID());
 
 			User user1 = User.builder()
 			                 .role("user")
@@ -26,6 +40,11 @@ class InitUsers {
 			                 .photoUrl("http://photo1.com.pl")
 			                 .userLevel(userLevel1)
 			                 .coins(1_000_000)
+//			                 .endedItems(new ArrayList<>(){{
+//			                 	add(itemCard1);
+////				                add(itemCard1bis);
+//				                add(itemCard2);
+//			                 }})
 			                 .build();
 			User user2 = User.builder()
 			                 .role("user")
@@ -95,6 +114,14 @@ class InitUsers {
 			usersRepository.save(mentor2);
 			usersRepository.save(mentor3);
 			usersRepository.save(creepy);
+
+		ItemCard itemCard1bisbis = itemCardRepository.findById(1L).get();
+		User user1bis = usersRepository.findById(1L).get();
+		user1bis.getEndedItems().add(itemCard1bisbis);
+		usersRepository.save(user1bis);
+//		user1bis = usersRepository.findById(1L).get();
+//		user1bis.getEndedItems().add(itemCard1);
+//		usersRepository.save(user1bis);
 		System.out.println("Users saved: " + usersRepository.count() + ConsoleColors.RESET);
 		}
 }

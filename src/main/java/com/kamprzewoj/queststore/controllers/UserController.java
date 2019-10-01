@@ -1,6 +1,5 @@
 package com.kamprzewoj.queststore.controllers;
 
-import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,4 @@ public class UserController {
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
-
-
-
 }
