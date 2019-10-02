@@ -1,5 +1,6 @@
 package com.kamprzewoj.queststore.security;
 
+import com.kamprzewoj.queststore.errorHandlers.CustomGlobalExceptionHandler;
 import com.kamprzewoj.queststore.tools.ROLE;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,6 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 		http
 				.authorizeRequests()
 				.antMatchers(HttpMethod.PUT,"/api/userServices/buyItemCard/**").hasRole(ROLE.USER)
+//				.antMatchers(HttpMethod.GET,"/api/mentorServices/**").hasRole(ROLE.MENTOR)
 				.antMatchers(HttpMethod.GET,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
 				//todo beyond change rights !!! only for selected end points
 				.antMatchers(HttpMethod.DELETE,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
