@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore.service;
+package com.kamprzewoj.queststore.services;
 
 import com.kamprzewoj.queststore.model.users.User;
 import com.kamprzewoj.queststore.repository.users.UserRepository;
@@ -9,14 +9,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class CreepyService {
+public class MentorService {
 	private UserRepository userRepository;
 
-	public CreepyService(UserRepository userRepository) {
+	public MentorService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
-	public List<User> getAllMentors(){
-		return userRepository.getAllByRoleOrderByFirstName("mentor");
+	public List<User> getAllUsers(){
+		return userRepository.getAllByRoleOrderByFirstName("user");
 	}
 }

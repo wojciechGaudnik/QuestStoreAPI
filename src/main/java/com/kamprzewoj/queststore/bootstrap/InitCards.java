@@ -28,7 +28,7 @@ class InitCards {
 		ItemCard itemCard1 = ItemCard.builder()
 				.name("Item Card First")
 				.photoUrl("http://test.photo1.com")
-				.value(100)
+				.value(10)
 				.userLevel(userLevel1)
 				.description("Item Card Decryption First")
 				.allowedGroupBuy(false)
@@ -37,7 +37,7 @@ class InitCards {
 		ItemCard itemCard2 = ItemCard.builder()
 				.name("Item Card Second")
 				.photoUrl("http://test.photo2.com")
-				.value(1)
+				.value(20)
 				.userLevel(userLevel2)
 				.description("Item Card Decryption Second")
 				.allowedGroupBuy(false)
@@ -46,7 +46,7 @@ class InitCards {
 		ItemCard itemCard3 = ItemCard.builder()
 				.name("Item Card Third")
 				.photoUrl("http://test.photo3.com")
-				.value(1)
+				.value(30)
 			    .userLevel(userLevel3)
 			    .description("Item Card Decryption Third")
 				.allowedGroupBuy(false)
@@ -66,12 +66,12 @@ class InitCards {
 		QuestCategory questCategory2 = questCategoryRepository.findById(2L).get();
 		QuestCategory questCategory3 = questCategoryRepository.findById(3L).get();
 		UserLevel userLevel1 = userLevelRepository.findById(1L).get();
-		UserLevel userLevel2 = userLevelRepository.findById(1L).get();
-		UserLevel userLevel3 = userLevelRepository.findById(1L).get();
+		UserLevel userLevel2 = userLevelRepository.findById(2L).get();
+		UserLevel userLevel3 = userLevelRepository.findById(3L).get();
 		QuestCard questCard1 = QuestCard.builder()
 				.name("Quest Card First")
 				.photoUrl("http://test.photo1.com")
-				.value(1)
+				.value(100)
 		        .userLevel(userLevel1)
 				.description("Quest Card Decryption First")
 				.allowedGroupBuy(false)
@@ -80,7 +80,7 @@ class InitCards {
 		QuestCard questCard2 = QuestCard.builder()
 				.name("Quest Card Second")
 				.photoUrl("http://test.photo2.com")
-				.value(2)
+				.value(200)
 				.userLevel(userLevel2)
 				.description("Quest Card Decryption Second")
 				.allowedGroupBuy(false)
@@ -89,7 +89,7 @@ class InitCards {
 		QuestCard questCard3 = QuestCard.builder()
 				.name("Quest Card Third")
 				.photoUrl("http://test.photo3.com")
-				.value(3)
+				.value(300)
 				.userLevel(userLevel3)
 				.description("Quest Card Decryption Third")
 				.allowedGroupBuy(false)

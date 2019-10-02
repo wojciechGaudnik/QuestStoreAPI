@@ -1,7 +1,7 @@
 package com.kamprzewoj.queststore.controllers;
 
 import com.kamprzewoj.queststore.model.users.User;
-import com.kamprzewoj.queststore.service.MentorService;
+import com.kamprzewoj.queststore.services.MentorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;

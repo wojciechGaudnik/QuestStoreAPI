@@ -1,7 +1,7 @@
 package com.kamprzewoj.queststore.controllers;
 
 import com.kamprzewoj.queststore.model.users.User;
-import com.kamprzewoj.queststore.service.CreepyService;
+import com.kamprzewoj.queststore.services.CreepyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.hateoas.Link;

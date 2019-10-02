@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore.service;
+package com.kamprzewoj.queststore.services;
 
 import com.kamprzewoj.queststore.tools.ROLE;
 import lombok.extern.slf4j.Slf4j;

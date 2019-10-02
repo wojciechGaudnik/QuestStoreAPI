@@ -1,6 +1,6 @@
 package com.kamprzewoj.queststore.controllers;
 
-import com.kamprzewoj.queststore.service.UserService;
+import com.kamprzewoj.queststore.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +20,14 @@ public class UserController {
 	@PutMapping(value = "/buyItemCard/{id}")
 	public ResponseEntity buyItemCard(@PathVariable Long id) {
 		if (userService.buyItemCard(id)) {
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+
+	@PutMapping(value = "/buyQuestCard/{id}")
+	public ResponseEntity buyQuestCard(@PathVariable Long id) {
+		if (userService.buyQuestCard(id)) {
 			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
 		}
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
