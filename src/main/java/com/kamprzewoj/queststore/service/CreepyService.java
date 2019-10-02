@@ -9,14 +9,14 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class MentorService {
+public class CreepyService {
 	private UserRepository userRepository;
 
-	public MentorService(UserRepository userRepository) {
+	public CreepyService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 
-	public List<User> getAllUsers(){
-		return userRepository.getAllByRoleOrderByFirstName("user");
+	public List<User> getAllMentors(){
+		return userRepository.getAllByRoleOrderByFirstName("mentor");
 	}
 }

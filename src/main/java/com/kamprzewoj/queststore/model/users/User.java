@@ -1,6 +1,8 @@
 package com.kamprzewoj.queststore.model.users;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.kamprzewoj.queststore.model.baskets.GroupItemBasket;
 import com.kamprzewoj.queststore.model.baskets.GroupQuestBasket;
 import com.kamprzewoj.queststore.model.cards.ItemCard;
@@ -64,7 +66,7 @@ public class User implements Serializable{
 	private String nick;
 
 	@NotBlank(message = "password is mandatory")
-//	@JsonIgnore
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private String password;  //todo <--- how save password
 
 //	@Column(unique = true)

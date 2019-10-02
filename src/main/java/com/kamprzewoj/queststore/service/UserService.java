@@ -30,10 +30,6 @@ public class UserService {
 		if (itemCardOptional.isEmpty()) return false;
 		ItemCard itemCard = itemCardOptional.get();
 
-		log.error("---------------------------------------");
-		log.error(String.valueOf(user.getUserLevel().getValue()));
-		log.error(String.valueOf(itemCard.getUserLevel().getValue()));
-
 		if (user.getCoins() >= itemCard.getValue()
 				&& user.getUserLevel().getValue() >= itemCard.getUserLevel().getValue()) {
 			user.getItemCards().add(itemCard);
@@ -44,8 +40,4 @@ public class UserService {
 			return false;
 		}
 	}
-
-
-
-
 }

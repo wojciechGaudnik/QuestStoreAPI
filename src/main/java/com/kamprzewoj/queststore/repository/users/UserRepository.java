@@ -10,8 +10,5 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<User, Long> {
 
 	User findByNick(String nick);
-
-	//	List<User> findAllByRoleAnd(String role);
-//	List<User> findUsersByRole(String role);
 	List<User> getAllByRoleOrderByFirstName(String role);
 }
