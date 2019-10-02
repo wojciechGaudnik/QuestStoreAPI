@@ -1,8 +1,6 @@
 package com.kamprzewoj.queststore.headers;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -10,26 +8,23 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@Component
+@WebFilter
 public class AddResponseHeaderFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 	                     FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		log.error("test <-----------------------------------------------");
-		httpServletResponse.setHeader(
-				"Baeldung-Example-Filter-Header", "Value-Filter");
-		chain.doFilter(request, httpServletResponse);
+		httpServletResponse.setHeader("Content-Type", "application/hal+json;charset=UTF-8");
+		httpServletResponse.setHeader("bq666S", "bq666S1");
+		chain.doFilter(request, response);
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// ...
 	}
 
 	@Override
 	public void destroy() {
-		// ...
 	}
 }

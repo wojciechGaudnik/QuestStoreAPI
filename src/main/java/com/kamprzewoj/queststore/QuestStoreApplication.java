@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 //
 //org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
-@Component
+@ServletComponentScan
 @SpringBootApplication()
 public class QuestStoreApplication {
 
