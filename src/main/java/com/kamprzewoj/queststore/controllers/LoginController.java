@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -37,6 +38,9 @@ public class LoginController {
 		Resource<User> resource = new Resource<>(user);
 		Link link = ControllerLinkBuilder.linkTo(User.class).slash("rest/users/" + user.getId()).withSelfRel();
 		resource.add(link);
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(resource);
+
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "application/hal+json;charset=UTF-8");
+		return new ResponseEntity<>(resource, responseHeaders, HttpStatus.ACCEPTED);// .status(HttpStatus.ACCEPTED).body(resource);
 	}
 }
