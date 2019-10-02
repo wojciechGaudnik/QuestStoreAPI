@@ -1,4 +1,4 @@
-package com.kamprzewoj.queststore.headers;
+package com.kamprzewoj.queststore.config;
 
 import lombok.extern.slf4j.Slf4j;
 

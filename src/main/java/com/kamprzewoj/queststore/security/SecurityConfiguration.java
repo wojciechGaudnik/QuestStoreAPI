@@ -39,7 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 				.authorizeRequests()
-				.antMatchers(HttpMethod.PUT,"/api/userServices/buyItemCard/**").hasAnyRole(ROLE.USER, ROLE.MENTOR, ROLE.CREEPY)
+				.antMatchers(HttpMethod.PUT,"/api/userServices/**").hasAnyRole(ROLE.USER, ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET,"/api/mentorServices/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET, "/api/creepyServices/**").hasRole(ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
@@ -47,6 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.antMatchers(HttpMethod.DELETE,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
 				.antMatchers(HttpMethod.GET, "/api/login/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
+				.antMatchers(HttpMethod.POST,"/api/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers("/**").hasRole(ROLE.CREEPY)
 				.and()
 				.httpBasic();
