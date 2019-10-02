@@ -16,7 +16,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
 	@ExceptionHandler(value = {NullPointerException.class})
 	public ResponseEntity<Object> handleNullPointerException(NullPointerException e, WebRequest request) {
 		String errorMessage = e.getLocalizedMessage();
-		logger.error(ConsoleColors.RED + request + ConsoleColors.RESET);
+		logger.error(ConsoleColors.RED + request + " <--------- request"+ ConsoleColors.RESET);
 		if(errorMessage == null) errorMessage = e.toString();
 		return new ResponseEntity<>(
 				errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR

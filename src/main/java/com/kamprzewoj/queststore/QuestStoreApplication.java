@@ -7,8 +7,10 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 //todo @RestControllerEndpoint()  //todo <--- read about it
 // todo --- how mount new end point without crash existing from REST ? <--- siadz na spotkojnie i
@@ -22,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 //
 //org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
-
+@Component
 @SpringBootApplication()
 public class QuestStoreApplication {
 
