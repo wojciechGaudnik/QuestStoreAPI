@@ -79,12 +79,14 @@ public class User implements Serializable{
 	// todo https://thoughts-on-java.org/hibernate-tips-elementcollection/
 	//todo https://www.youtube.com/watch?v=kk207HAym_I
 	@NotAudited
-	@ElementCollection
-	@CollectionTable(
-			name = "endedItemstest",
-			joinColumns = @JoinColumn(name = "CARD_ID"))
-	@GenericGenerator(name="sequence-gen", strategy="sequence")
-	@CollectionId(columns = { @Column(name="users_old_item_cards") }, generator = "sequence-gen", type = @Type(type="long"))
+//	@ElementCollection
+//	@CollectionTable(
+//			name = "endedItemstest",
+//			joinColumns = @JoinColumn(name = "CARD_ID"))
+//	@GenericGenerator(name="sequence-gen", strategy="sequence")
+//	@CollectionId(columns = { @Column(name="users_old_item_cards") }, generator = "sequence-gen", type = @Type(type="long"))
+
+	@ManyToMany
 	private Collection<ItemCard> endedItems;
 
 	@ElementCollection

@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -42,6 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.authorizeRequests()
 				.antMatchers(HttpMethod.PUT,"/api/userServices/buyItemCard/**").hasRole(ROLE.USER)
 				.antMatchers(HttpMethod.GET,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
+				//todo beyond change rights !!! only for selected end points
+				.antMatchers(HttpMethod.DELETE,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
 				.antMatchers(HttpMethod.GET, "/api/login/**").permitAll()
 				.antMatchers(HttpMethod.GET,"/api/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers("/**").hasRole(ROLE.CREEPY)
@@ -70,7 +73,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 	@Bean
 	CorsConfigurationSource corsConfigurationSource() {
 		CorsConfiguration configuration = new CorsConfiguration();
-		configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+		configuration.setAllowedOrigins(Arrays.asList("*"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
 		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));

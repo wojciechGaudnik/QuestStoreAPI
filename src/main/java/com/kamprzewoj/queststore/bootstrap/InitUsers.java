@@ -26,9 +26,9 @@ class InitUsers {
 		ItemCard itemCard1 = itemCardRepository.findById(1L).get();
 		ItemCard itemCard1bis = itemCardRepository.findById(1L).get();
 		ItemCard itemCard2 = itemCardRepository.findById(2L).get();
-		itemCard1.setUuid(UUID.randomUUID());
-		itemCard1bis.setUuid(UUID.randomUUID());
-		itemCard2.setUuid(UUID.randomUUID());
+//		itemCard1.setUuid(UUID.randomUUID());
+//		itemCard1bis.setUuid(UUID.randomUUID());
+//		itemCard2.setUuid(UUID.randomUUID());
 
 			User user1 = User.builder()
 			                 .role("user")
@@ -40,11 +40,11 @@ class InitUsers {
 			                 .photoUrl("http://photo1.com.pl")
 			                 .userLevel(userLevel1)
 			                 .coins(1_000_000)
-//			                 .endedItems(new ArrayList<>(){{
-//			                 	add(itemCard1);
-////				                add(itemCard1bis);
-//				                add(itemCard2);
-//			                 }})
+			                 .endedItems(new ArrayList<>(){{
+			                 	add(itemCard1);
+				                add(itemCard1bis);
+				                add(itemCard2);
+			                 }})
 			                 .build();
 			User user2 = User.builder()
 			                 .role("user")
@@ -115,13 +115,6 @@ class InitUsers {
 			usersRepository.save(mentor3);
 			usersRepository.save(creepy);
 
-		ItemCard itemCard1bisbis = itemCardRepository.findById(1L).get();
-		User user1bis = usersRepository.findById(1L).get();
-		user1bis.getEndedItems().add(itemCard1bisbis);
-		usersRepository.save(user1bis);
-//		user1bis = usersRepository.findById(1L).get();
-//		user1bis.getEndedItems().add(itemCard1);
-//		usersRepository.save(user1bis);
 		System.out.println("Users saved: " + usersRepository.count() + ConsoleColors.RESET);
 		}
 }
