@@ -5,10 +5,9 @@ import com.kamprzewoj.queststore.services.MentorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resources;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -24,12 +23,20 @@ public class MentorController {
 		this.mentorService = mentorService;
 	}
 
-	@GetMapping(value = "/getAllUsers/")
+	@GetMapping(value = "/getAllUsers")
 	public ResponseEntity<Resources<User>> getAllUsers() {
-		final List<User> userList = mentorService.getAllUsers();
-		final Resources<User> resources = new Resources<>(userList);
+		List<User> userList = mentorService.getAllUsers();
+		Resources<User> resources = new Resources<>(userList);
 		String uriString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
 		resources.add(new Link(uriString, "self"));
 		return ResponseEntity.ok(resources);
+	}
+
+	@PutMapping(value = "/scoreQuestCard/{userId}")
+	public ResponseEntity buyQuestCard(@RequestBody Long questCardId, @PathVariable Long userId) {
+		if (mentorService.scoreQuestCard(questCardId, userId)) {
+			return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 	}
 }

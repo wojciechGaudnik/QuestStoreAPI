@@ -41,6 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.authorizeRequests()
 				.antMatchers(HttpMethod.PUT,"/api/userServices/**").hasAnyRole(ROLE.USER, ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET,"/api/mentorServices/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
+				.antMatchers(HttpMethod.PUT,"/api/mentorServices/**").hasAnyRole(ROLE.MENTOR, ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET, "/api/creepyServices/**").hasRole(ROLE.CREEPY)
 				.antMatchers(HttpMethod.GET,"/api/rest/users/{userId}/**").access("@webSecurity.checkUserId(authentication,#userId)")
 				//todo beyond change rights !!! only for selected end points

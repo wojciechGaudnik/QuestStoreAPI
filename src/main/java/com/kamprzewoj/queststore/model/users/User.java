@@ -1,8 +1,6 @@
 package com.kamprzewoj.queststore.model.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
 import com.kamprzewoj.queststore.model.baskets.GroupItemBasket;
 import com.kamprzewoj.queststore.model.baskets.GroupQuestBasket;
 import com.kamprzewoj.queststore.model.cards.ItemCard;
@@ -10,19 +8,13 @@ import com.kamprzewoj.queststore.model.cards.QuestCard;
 import com.kamprzewoj.queststore.model.common.UserClass;
 import com.kamprzewoj.queststore.model.common.UserLevel;
 import lombok.*;
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.IndexColumn;
-import org.hibernate.annotations.Type;
 import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.hibernate.validator.constraints.Range;
-import org.testng.annotations.Test;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Collection;
@@ -90,8 +82,8 @@ public class User implements Serializable{
 	@ManyToMany
 	private Collection<ItemCard> endedItems;
 
-	@ElementCollection
-	private List<QuestCard> endedQuests;
+	@ManyToMany
+	private Collection<QuestCard> endedQuests;
 
 	@OneToMany(
 			mappedBy = "owner",
