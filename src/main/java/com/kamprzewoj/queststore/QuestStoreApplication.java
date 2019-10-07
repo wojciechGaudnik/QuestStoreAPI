@@ -12,7 +12,7 @@ import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-//test git
+//test git jet
 //todo @RestControllerEndpoint()  //todo <--- read about it
 // todo --- how mount new end point without crash existing from REST ? <--- siadz na spotkojnie i
 // todo przelec od gotowych end pontow, one musza być jakimś kontrolerem wystawiane !!! znajdz i NADPISZ A JAK TO NIE PUJDZIE
