@@ -11,9 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin ///todo <--- important
 @Slf4j
 @RestController
 public class LoginController {
@@ -27,17 +29,17 @@ public class LoginController {
 	}
 
 
-	@RequestMapping("/login")
-	public ResponseEntity<Resource<User>> login(){
-		if (loginService.login().isEmpty()) {
-			return ResponseEntity.status((HttpStatus.FORBIDDEN)).build();
-		}
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		User user = userRepository.findByNick(authentication.getName());
-		Resource<User> resource = new Resource<>(user);
-		Link link = ControllerLinkBuilder.linkTo(User.class).slash("rest/users/" + user.getId()).withSelfRel();
-		resource.add(link);
-
-		return ResponseEntity.status(HttpStatus.ACCEPTED).body(resource);
-	}
+//	@RequestMapping("/login")
+//	public ResponseEntity<Resource<User>> login(){
+//		if (loginService.login().isEmpty()) {
+//			return ResponseEntity.status((HttpStatus.FORBIDDEN)).build();
+//		}
+//		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		User user = userRepository.findByNick(authentication.getName());
+//		Resource<User> resource = new Resource<>(user);
+//		Link link = ControllerLinkBuilder.linkTo(User.class).slash("rest/users/" + user.getId()).withSelfRel();
+//		resource.add(link);
+//
+//		return ResponseEntity.status(HttpStatus.ACCEPTED).body(resource);
+//	}
 }

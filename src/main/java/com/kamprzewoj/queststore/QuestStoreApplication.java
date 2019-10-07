@@ -7,10 +7,8 @@ import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
 
 //test git jet
 //todo @RestControllerEndpoint()  //todo <--- read about it
@@ -25,8 +23,9 @@ import org.springframework.stereotype.Component;
 //
 //org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 
-@ServletComponentScan
-@SpringBootApplication()
+
+
+@SpringBootApplication
 public class QuestStoreApplication {
 
 	public static void main(String[] args) {
@@ -48,6 +47,7 @@ public class QuestStoreApplication {
 		};
 
 		tomcat.addAdditionalTomcatConnectors(httpToHttpsRedirectConnector());
+
 		return tomcat;
 	}
 
@@ -59,7 +59,7 @@ public class QuestStoreApplication {
 		connector.setRedirectPort(8443);
 		return connector;
 	}
-}
 
+}
 
 

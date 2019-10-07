@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -22,7 +22,20 @@
 
 
 
+
+
+
 	<dependencies>
+
+
+		<dependency>
+			<groupId>com.auth0</groupId>
+			<artifactId>java-jwt</artifactId>
+			<version>3.8.2</version>
+		</dependency>
+
+
+
 		<!--	todo REST -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,7 +45,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-<!--		todo DATA BASES -->
+		<!--		todo DATA BASES -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -43,7 +56,7 @@
 			<scope>runtime</scope>
 		</dependency>
 
-<!--		todo from separate module -->
+		<!--		todo from separate module -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-envers</artifactId>
@@ -182,13 +195,13 @@
 
 	<dependencyManagement>
 		<dependencies>
-<!--			<dependency>-->
-<!--				<groupId>org.springframework.data</groupId>-->
-<!--				<artifactId>spring-data-releasetrain</artifactId>-->
-<!--				<version>Lovelace-SR10</version>-->
-<!--				<scope>import</scope>-->
-<!--				<type>pom</type>-->
-<!--			</dependency>-->
+			<!--			<dependency>-->
+			<!--				<groupId>org.springframework.data</groupId>-->
+			<!--				<artifactId>spring-data-releasetrain</artifactId>-->
+			<!--				<version>Lovelace-SR10</version>-->
+			<!--				<scope>import</scope>-->
+			<!--				<type>pom</type>-->
+			<!--			</dependency>-->
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-dependencies</artifactId>
