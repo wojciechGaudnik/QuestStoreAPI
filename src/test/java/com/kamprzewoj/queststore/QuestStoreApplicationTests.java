@@ -72,6 +72,7 @@ public class QuestStoreApplicationTests {
 		HttpEntity<LoginViewModel> request = new HttpEntity<>(loginViewModel, httpHeaders);
 		ResponseEntity<String> stringResponseEntity = this.restTemplate.postForEntity(uri, request, String.class);
 
+		Assert.assertEquals(200, stringResponseEntity.getStatusCodeValue());
 		System.out.println(stringResponseEntity.getStatusCode() + " <-------------------------");
 		System.out.println(stringResponseEntity.getStatusCodeValue() + " <-------------------------");
 		System.out.println(stringResponseEntity.getHeaders() + " <-------------------------");
