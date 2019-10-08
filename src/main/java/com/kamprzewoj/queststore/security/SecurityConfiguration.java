@@ -1,11 +1,12 @@
 package com.kamprzewoj.queststore.security;
 
 import com.kamprzewoj.queststore.repository.users.UserRepository;
+import com.kamprzewoj.queststore.security.JWT.JwtAuthenticationFilter;
+import com.kamprzewoj.queststore.security.JWT.JwtAuthorizationFilter;
 import com.kamprzewoj.queststore.tools.ROLE;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,7 +15,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -44,16 +44,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
-				// remove csrf and state in session because in jwt we do not need them
 				.csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-				// add jwt filters (1. authentication, 2. authorization)
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
-				.addFilter(new JwtAuthorizationFilter(authenticationManager(),  this.userRepository))
+				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
 				.authorizeRequests()
-				// configure access rules
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
+				.antMatchers("/api/actuator/**").anonymous()
+				.antMatchers("/api/userData").permitAll()
+				.antMatchers("/api/rest/**").permitAll()
 				.antMatchers("/api/**").hasRole(ROLE.CREEPY)
 				.anyRequest().authenticated();
 //		http
@@ -71,13 +70,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 //				.antMatchers("/**").hasRole(ROLE.CREEPY)
 //				.and()
 //				.httpBasic();
-//		http
-//				.cors()
-//				.and()
-//				.csrf().disable();
 	}
-
-
 
 	@Bean
 	PasswordEncoder passwordEncoder() {
@@ -93,18 +86,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 		return daoAuthenticationProvider;
 	}
 
-//	@Bean
-//	CorsConfigurationSource corsConfigurationSource() {
-//		CorsConfiguration configuration = new CorsConfiguration();
-//		configuration.setAllowedOrigins(Arrays.asList("*"));
-//		configuration.setAllowCredentials(true);
-//		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
-//		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		source.registerCorsConfiguration("/**", configuration);
-//		return source;
-//	}
-//
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+		CorsConfiguration configuration = new CorsConfiguration();
+		configuration.setAllowedOrigins(Arrays.asList("*"));
+		configuration.setAllowCredentials(true);
+		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
+		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PUT"));
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+		return source;
+	}
+
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer() {
 //		return new WebMvcConfigurerAdapter() {
