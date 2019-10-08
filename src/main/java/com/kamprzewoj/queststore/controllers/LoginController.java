@@ -27,7 +27,7 @@ public class LoginController {
 	}
 
 
-	@RequestMapping("/login")
+	@RequestMapping("/userData")
 	public ResponseEntity<Resource<User>> login(){
 		if (loginService.login().isEmpty()) {
 			return ResponseEntity.status((HttpStatus.FORBIDDEN)).build();
