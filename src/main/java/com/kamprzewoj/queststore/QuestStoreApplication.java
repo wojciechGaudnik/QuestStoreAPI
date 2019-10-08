@@ -24,7 +24,7 @@ import org.springframework.context.annotation.Bean;
 //org.springframework.dao.DataIntegrityViolationException: could not execute statement; SQL [n/a]; constraint [uk_lrjnw0jty1fs19q56u0us8d0n]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement
 //todo https://stackoverflow.com/questions/19613562/how-can-i-specify-my-keystore-file-with-spring-boot-and-tomcat/25562938#25562938
 
-
+// todo dev branch test
 @SpringBootApplication
 public class QuestStoreApplication {
 
