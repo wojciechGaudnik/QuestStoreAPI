@@ -30,6 +30,7 @@ import java.security.cert.X509Certificate;
 import javax.net.ssl.SSLContext;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 
 //todo https://dzone.com/articles/how-to-create-rest-api-with-spring-boot
@@ -38,6 +39,8 @@ import java.net.URISyntaxException;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = QuestStoreApplication.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class QuestStoreApplicationTests {
+
+	private String token;
 
 	@Autowired
 	private TestRestTemplate restTemplate;
@@ -61,7 +64,7 @@ public class QuestStoreApplicationTests {
 
 	@Test
 	public void login() throws URISyntaxException {
-		final String baseUrl = getRootUrl() + "/login";
+		String baseUrl = getRootUrl() + "/login";
 		URI uri = new URI(baseUrl);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
@@ -73,20 +76,27 @@ public class QuestStoreApplicationTests {
 		ResponseEntity<String> stringResponseEntity = this.restTemplate.postForEntity(uri, request, String.class);
 
 		Assert.assertEquals(200, stringResponseEntity.getStatusCodeValue());
-		System.out.println(stringResponseEntity.getStatusCode() + " <-------------------------");
-		System.out.println(stringResponseEntity.getStatusCodeValue() + " <-------------------------");
-		System.out.println(stringResponseEntity.getHeaders() + " <-------------------------");
-		System.out.println(stringResponseEntity.getHeaders().get("Authorization") + " <-------------------------");
-		System.out.println(stringResponseEntity.getHeaders() + " <-------------------------");
-		System.out.println(stringResponseEntity.getBody() + " <-------------------------");
-//		httpHeaders.add();
+		token = Objects.requireNonNull(stringResponseEntity.getHeaders().get("Authorization")).get(0);
+
+		httpHeaders.add("Authorization", token);
+		baseUrl = getRootUrl() + "/api/userData";
+		uri = new URI(baseUrl);
+		request = new HttpEntity<>(httpHeaders);
+
+		stringResponseEntity = this.restTemplate.postForEntity(uri, request, String.class);
+		Assert.assertTrue(Objects.requireNonNull(stringResponseEntity.getBody()).contains("\"role\" : \"creepy\""));
+	}
+
+	@Test
+	public void rootData() {
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("Authorization", token);
 	}
 
 
 
 
-//	#keytool -genkey -alias bootsecurity -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore bootsecurity.p12 -validity 3650
-//			#-ext "SAN:c=DNS:localhost,IP:127.0.0.1"
+
 	@Bean
 	public RestTemplate restTemplate() throws KeyStoreException, NoSuchAlgorithmException, KeyManagementException {
 		TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
