@@ -51,10 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
 				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
 				.authorizeRequests()
-				.antMatchers("/api/actuator/**").anonymous()
-				.antMatchers("/api/userData").permitAll()
-				.antMatchers("/api/rest/**").permitAll()
-				.antMatchers("/api/**").hasRole(ROLE.CREEPY)
+//				.antMatchers("/api/actuator/**").anonymous()
+//				.antMatchers("/api/userData").permitAll()
+//				.antMatchers("/api/rest/**").permitAll()
+//				.antMatchers("/api/**").hasRole(ROLE.CREEPY)
+				.antMatchers("/api/**").hasAnyRole(ROLE.CREEPY, ROLE.MENTOR, ROLE.USER)
 				.anyRequest().authenticated();
 //		http
 //				.authorizeRequests()
