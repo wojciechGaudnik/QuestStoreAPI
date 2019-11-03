@@ -53,11 +53,6 @@ public class QuestStoreApplicationTests {
 	}
 
 	@Test
-	public void contextLoads() {
-
-	}
-
-	@Test
 	public void url(){
 		Assert.assertEquals("https://localhost:8443", getRootUrl());
 	}
@@ -79,7 +74,7 @@ public class QuestStoreApplicationTests {
 		token = Objects.requireNonNull(stringResponseEntity.getHeaders().get("Authorization")).get(0);
 
 		httpHeaders.add("Authorization", token);
-		baseUrl = getRootUrl() + "/api/userData";
+		baseUrl = "https://localhost:8443" + "/api/userData";
 		uri = new URI(baseUrl);
 		request = new HttpEntity<>(httpHeaders);
 
@@ -87,11 +82,14 @@ public class QuestStoreApplicationTests {
 		Assert.assertTrue(Objects.requireNonNull(stringResponseEntity.getBody()).contains("\"role\" : \"creepy\""));
 	}
 
-	@Test
-	public void rootData() {
-		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add("Authorization", token);
-	}
+//	@Test
+//	public void
+
+//	@Test
+//	public void rootData() {
+//		HttpHeaders httpHeaders = new HttpHeaders();
+//		httpHeaders.add("Authorization", token);
+//	}
 
 
 

@@ -34,7 +34,7 @@ public class User implements Serializable{
 	private Long Id;
 
 //	@JsonIgnore
-	@NotBlank(message = "firstName is mandatory")
+	@NotBlank(message = "role is mandatory")
 	private String role = "anonymous";
 
 	@NotBlank(message = "firstName is mandatory")
@@ -58,11 +58,14 @@ public class User implements Serializable{
 
 	@NotBlank(message = "password is mandatory")
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	private String password;  //todo <--- how save password
+	private String password;
 
 //	@Column(unique = true)
 	@Size(min = 3, max = 100, message = "length out of range ")
 	private String photoUrl;
+
+//	@OneToOne
+//	private Properties properties = null;
 
 	@Range(min = 0L, max = 100_000_000, message = "coins out of range ")
 	private int coins;

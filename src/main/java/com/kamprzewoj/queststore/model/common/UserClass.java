@@ -41,6 +41,15 @@ public class UserClass {
 			inverseJoinColumns = {@JoinColumn(name = "user_id")})
 	private List<User> users;
 
+	@ManyToMany(
+			targetEntity= User.class)
+	@JoinTable(
+			uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "user_class_id"})},
+			name= "join_userclasses_mentors",
+			joinColumns = {@JoinColumn(name = "user_class_id")},
+			inverseJoinColumns = {@JoinColumn(name = "user_id")})
+	private List<User> mentors;
+
 //	@OneToMany(
 //			mappedBy = "userClass",
 //			targetEntity = User.class)
