@@ -64,8 +64,8 @@ public class QuestStoreApplicationTests {
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		LoginViewModel loginViewModel = new LoginViewModel();
-		loginViewModel.setNick("root");
-		loginViewModel.setPass("root");
+		loginViewModel.setUsername("root");
+		loginViewModel.setPassword("root");
 
 		HttpEntity<LoginViewModel> request = new HttpEntity<>(loginViewModel, httpHeaders);
 		ResponseEntity<String> stringResponseEntity = this.restTemplate.postForEntity(uri, request, String.class);

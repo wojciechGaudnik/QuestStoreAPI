@@ -45,8 +45,8 @@ public class SimpleTest {
 			httpsURLConnection.setRequestProperty("Accept", "application/json");
 			httpsURLConnection.setDoOutput(true);
 			loginViewModel = new LoginViewModel();
-			loginViewModel.setNick("root");
-			loginViewModel.setPass("root");
+			loginViewModel.setUsername("root");
+			loginViewModel.setPassword("root");
 			mapper = new ObjectMapper();
 			loginViewModelJSON = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(loginViewModel);
 
