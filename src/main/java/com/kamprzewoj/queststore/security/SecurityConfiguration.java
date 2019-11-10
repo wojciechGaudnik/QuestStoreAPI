@@ -51,9 +51,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.addFilter(new JwtAuthenticationFilter(authenticationManager()))
 				.addFilter(new JwtAuthorizationFilter(authenticationManager(), this.userRepository))
 				.authorizeRequests()
-//				.antMatchers("/api/actuator/**").anonymous()
+//				.antMatchers("/**").permitAll()
+				.antMatchers("/api/actuator/**").anonymous()
 //				.antMatchers("/api/userData").permitAll()
-//				.antMatchers("/api/rest/**").permitAll()
+				.antMatchers("/api/rest/browser/**").anonymous()
+				.antMatchers("/api/rest/**").anonymous()
 //				.antMatchers("/api/**").hasRole(ROLE.CREEPY)
 				.antMatchers("/api/**").hasAnyRole(ROLE.CREEPY, ROLE.MENTOR, ROLE.USER)
 				.anyRequest().authenticated();
@@ -94,7 +96,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 		configuration.setAllowedOrigins(Arrays.asList("*"));
 		configuration.setAllowCredentials(true);
 		configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
-		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PUT", "OPTIONS"));
+		configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PUT", "OPTIONS", "PATCH"));
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", configuration);
 		return source;
