@@ -50,7 +50,7 @@ public class UserEventHandler {
 		return new BCryptPasswordEncoder();
 	}
 
-	private void passwordAndCheckRole(User user, User currentUser) {
+	private void passwordAndCheckRole(User user, User currentUser) { //todo test it !!!
 		if (currentUser.getRole().equals(ROLE.CREEPY)
 				&& (user.getRole().equals(ROLE.MENTOR) || user.getRole().equals(ROLE.USER))) {
 			user.setPassword(passwordEncoder.encode(user.getPassword()));

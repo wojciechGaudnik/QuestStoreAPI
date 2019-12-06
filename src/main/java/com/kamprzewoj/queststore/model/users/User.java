@@ -16,7 +16,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,7 +26,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")
-public class User implements Serializable{
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,6 +77,10 @@ public class User implements Serializable{
 //			joinColumns = @JoinColumn(name = "CARD_ID"))
 //	@GenericGenerator(name="sequence-gen", strategy="sequence")
 //	@CollectionId(columns = { @Column(name="users_old_item_cards") }, generator = "sequence-gen", type = @Type(type="long"))
+
+//	@OneToOne  //todo zro to Users creepy mentors <--- 3@#$5 @#$% 23$5 #4%    rest assured
+// 	private Student student;
+
 
 	@ManyToMany
 	private Collection<ItemCard> endedItems;
