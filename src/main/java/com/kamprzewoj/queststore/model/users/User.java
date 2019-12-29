@@ -23,7 +23,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Builder(toBuilder = true)
 @Audited
 @Entity(name = "users")

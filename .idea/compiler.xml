@@ -2,23 +2,21 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="QuestStoreAPI" />
         <module name="queststore" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="discovery" target="13" />
       <module name="queststore" target="12" />
-      <module name="QuestStoreAPI" target="12" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="QuestStoreAPI" options="-parameters" />
+      <module name="discovery" options="-parameters" />
       <module name="queststore" options="-parameters" />
     </option>
   </component>

@@ -2,11 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/QuestStoreAll/QSAWorkingTests /QuestStoreAPI" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/QuestStoreAll/QuestStoreAPI" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/QuestStoreAll/QuestStoreSQL" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/QuestStoreAll/QuestStoreWeb" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/QuestStoreAll/typeofweb-kurs-react" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/react-tests" vcs="Git" />
   </component>
 </project>
